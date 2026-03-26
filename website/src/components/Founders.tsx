@@ -2,9 +2,15 @@
 
 import { content } from "@/lib/content";
 import { BubbleRevealText } from "./BubbleReveal";
+import Image from "next/image";
 
 export default function Founders() {
   const { founders } = content;
+
+  const founderImages: Record<string, string> = {
+    Emily: "/images/placeholder-founder-emily.svg",
+    Chris: "/images/placeholder-founder-chris.svg",
+  };
 
   return (
     <section id="founders" className="relative bg-lavender py-24 sm:py-32 micro-circles">
@@ -33,15 +39,19 @@ export default function Founders() {
             ))}
           </div>
 
-          {/* Founder initials */}
+          {/* Founder portraits — replace SVGs in /public/images/ with real photos */}
           <div className="flex gap-6 lg:justify-end lg:mt-16">
             {founders.people.map((person, i) => (
               <BubbleRevealText key={person.name} delay={0.3 + i * 0.12}>
                 <div className="text-center">
-                  <div className="w-24 h-24 sm:w-32 sm:h-32 rounded-full bg-violet/[0.08] border border-violet/[0.1] flex items-center justify-center mb-4 mx-auto">
-                    <span className="font-[family-name:var(--font-headline)] text-3xl sm:text-4xl font-bold text-violet">
-                      {person.name[0]}
-                    </span>
+                  <div className="w-28 h-28 sm:w-36 sm:h-36 rounded-full overflow-hidden bg-violet/[0.08] border border-violet/[0.1] mb-4 mx-auto">
+                    <Image
+                      src={founderImages[person.name]}
+                      alt={person.name}
+                      width={144}
+                      height={144}
+                      className="w-full h-full object-cover"
+                    />
                   </div>
                   <h3 className="font-[family-name:var(--font-headline)] font-bold text-ink text-base">
                     {person.name}

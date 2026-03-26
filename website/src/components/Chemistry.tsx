@@ -2,6 +2,12 @@
 
 import { content } from "@/lib/content";
 import { BubbleRevealText, BubbleRevealCard } from "./BubbleReveal";
+import Image from "next/image";
+
+const supplierLogos: Record<string, string> = {
+  Honeysurf: "/images/placeholder-supplier-honeysurf.svg",
+  "RE:Chemistry": "/images/placeholder-supplier-rechemistry.svg",
+};
 
 export default function Chemistry() {
   const { chemistry } = content;
@@ -33,7 +39,7 @@ export default function Chemistry() {
             ))}
           </div>
 
-          {/* Supplier cards */}
+          {/* Supplier cards — replace SVGs in /public/images/ with real logos */}
           <div className="flex flex-col gap-4 lg:mt-20">
             {chemistry.suppliers.map((supplier, i) => (
               <BubbleRevealCard
@@ -41,10 +47,15 @@ export default function Chemistry() {
                 delay={0.3 + i * 0.12}
                 className="bg-fog border border-violet/[0.06] p-8"
               >
-                <div className="flex items-center gap-4 mb-3">
-                  <div className="w-12 h-12 rounded-full bg-violet/[0.08] flex items-center justify-center flex-shrink-0">
-                    <div className="w-5 h-5 rounded-full bg-violet/20" />
-                  </div>
+                <div className="flex items-center gap-5 mb-3">
+                  {/* Supplier logo placeholder — replace with real logo */}
+                  <Image
+                    src={supplierLogos[supplier.name]}
+                    alt={`${supplier.name} logo`}
+                    width={200}
+                    height={80}
+                    className="h-12 w-auto flex-shrink-0 opacity-60"
+                  />
                   <div>
                     <h3 className="font-[family-name:var(--font-headline)] font-bold text-ink text-lg">
                       {supplier.name}
