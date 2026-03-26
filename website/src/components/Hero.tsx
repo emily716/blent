@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion";
 import { content } from "@/lib/content";
-import BubbleBackground from "./BubbleBackground";
 
 export default function Hero() {
   const { hero } = content;
@@ -15,18 +14,12 @@ export default function Hero() {
       {/* Radial glow */}
       <div className="absolute top-[-10%] right-[-5%] w-[60vw] h-[60vw] max-w-[700px] max-h-[700px] bg-violet/[0.12] rounded-full blur-[120px] pointer-events-none" />
 
-      {/* Animated bubbles */}
-      <BubbleBackground
-        count={45}
-        color="rgba(200,245,119,0.04)"
-      />
-
       <div className="relative z-10 px-6 sm:px-10 max-w-[1400px] mx-auto w-full pt-28 pb-16">
         <motion.div
           className="text-xs font-semibold tracking-[0.2em] uppercase text-lime mb-6 flex items-center gap-3"
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
+          transition={{ duration: 0.6, delay: 1.2 }}
         >
           <span className="block w-5 h-[1px] bg-lime" />
           {hero.eyebrow}
@@ -36,7 +29,7 @@ export default function Hero() {
           className="font-[family-name:var(--font-headline)] text-5xl sm:text-7xl lg:text-[5.5rem] xl:text-[6.5rem] font-bold text-white leading-[0.95] tracking-tight mb-6"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 0.7, delay: 1.4, ease: [0.22, 1, 0.36, 1] }}
         >
           {hero.headline}
         </motion.h1>
@@ -45,7 +38,7 @@ export default function Hero() {
           className="text-base sm:text-lg text-lavender/50 max-w-xl leading-relaxed mb-10"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.5 }}
+          transition={{ duration: 0.7, delay: 1.6 }}
         >
           {hero.sub}
         </motion.p>
@@ -54,7 +47,7 @@ export default function Hero() {
           className="flex flex-wrap items-center gap-4"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.65 }}
+          transition={{ duration: 0.7, delay: 1.8 }}
         >
           <a
             href={hero.cta.href}
