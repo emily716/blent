@@ -2,7 +2,6 @@
 
 import { content } from "@/lib/content";
 import { BubbleRevealText, BubbleRevealStat } from "./BubbleReveal";
-import BubbleBackground from "./BubbleBackground";
 
 export default function Numbers() {
   const { numbers } = content;
@@ -14,8 +13,6 @@ export default function Numbers() {
     >
       {/* Subtle micro-circles */}
       <div className="absolute inset-0 micro-circles-light" />
-
-      <BubbleBackground count={30} color="rgba(200,245,119,0.03)" />
 
       <div className="relative z-10 px-6 sm:px-10 max-w-[1400px] mx-auto">
         <BubbleRevealText>
