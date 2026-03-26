@@ -1,0 +1,49 @@
+@import "tailwindcss";
+
+@theme {
+  --color-dark: #1E1A3F;
+  --color-violet: #5B3FE8;
+  --color-lime: #C8F577;
+  --color-fog: #F4F2FF;
+  --color-lavender: #EDE9FF;
+  --color-coral: #FF6B8A;
+  --color-slate: #6B6880;
+  --color-ink: #100D26;
+
+  --font-headline: "Space Grotesk", sans-serif;
+  --font-body: "Inter", sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--color-fog);
+  color: var(--color-ink);
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--color-violet);
+  color: white;
+}
+
+/* Micro-circle background pattern */
+.micro-circles {
+  background-image: radial-gradient(circle, rgba(91,63,232,0.08) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.micro-circles-light {
+  background-image: radial-gradient(circle, rgba(200,245,119,0.06) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.micro-circles-dense {
+  background-image: radial-gradient(circle, rgba(91,63,232,0.05) 1px, transparent 1px);
+  background-size: 16px 16px;
+}
