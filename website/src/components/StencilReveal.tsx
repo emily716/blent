@@ -5,10 +5,10 @@ import { useEffect, useState } from "react";
 /*
   Viscous Bubble Stencil Reveal
 
-  Dark overlay with expanding organic circles that reveal the page.
-  Uses CSS mask-image with radial gradients — no canvas compositing issues.
-  The gooey filter (blur + contrast) is applied to an inner div with
-  HTML-rendered circles, not canvas, so the filter works correctly.
+  A solid dark overlay covers the viewport on load.
+  White circles expand with gooey filter (blur + contrast) applied,
+  making them merge into a liquid pool that "eats away" the dark layer.
+  After the reveal, the whole overlay fades out and unmounts.
 */
 
 interface Blob {
@@ -19,26 +19,31 @@ interface Blob {
 }
 
 export default function StencilReveal() {
-  const [phase, setPhase] = useState<"covering" | "revealing" | "done">("covering");
+  const [phase, setPhase] = useState<"covering" | "revealing" | "fading" | "done">(
+    "covering"
+  );
 
   useEffect(() => {
-    // Start reveal shortly after mount
-    const t1 = setTimeout(() => setPhase("revealing"), 100);
-    // Remove from DOM after animation completes
-    const t2 = setTimeout(() => setPhase("done"), 2200);
+    // Start expanding blobs
+    const t1 = setTimeout(() => setPhase("revealing"), 150);
+    // After blobs have fully expanded, fade the whole thing out
+    const t2 = setTimeout(() => setPhase("fading"), 1800);
+    // Remove from DOM
+    const t3 = setTimeout(() => setPhase("done"), 2400);
     return () => {
       clearTimeout(t1);
       clearTimeout(t2);
+      clearTimeout(t3);
     };
   }, []);
 
   if (phase === "done") return null;
 
-  // Generate blob positions — spread from center outward
+  // Generate blob positions — center outward
   const blobs: Blob[] = [];
-  const cx = 50; // percent
+  const cx = 50;
   const cy = 50;
-  // Center blob
+  // Center blob — largest, first to expand
   blobs.push({ x: cx, y: cy, size: 180, delay: 0 });
   // Ring 1
   for (let i = 0; i < 6; i++) {
@@ -47,7 +52,7 @@ export default function StencilReveal() {
       x: cx + Math.cos(angle) * 25,
       y: cy + Math.sin(angle) * 25,
       size: 140,
-      delay: 0.08 + i * 0.03,
+      delay: 0.06 + i * 0.03,
     });
   }
   // Ring 2
@@ -57,39 +62,44 @@ export default function StencilReveal() {
       x: cx + Math.cos(angle) * 50,
       y: cy + Math.sin(angle) * 45,
       size: 120,
-      delay: 0.15 + i * 0.025,
+      delay: 0.12 + i * 0.02,
     });
   }
-  // Corner fills
-  const corners = [
-    { x: 5, y: 5 }, { x: 95, y: 5 }, { x: 5, y: 95 }, { x: 95, y: 95 },
-    { x: 50, y: 5 }, { x: 50, y: 95 }, { x: 5, y: 50 }, { x: 95, y: 50 },
+  // Corner + edge fills
+  const edges = [
+    { x: 5, y: 5 },
+    { x: 95, y: 5 },
+    { x: 5, y: 95 },
+    { x: 95, y: 95 },
+    { x: 50, y: 5 },
+    { x: 50, y: 95 },
+    { x: 5, y: 50 },
+    { x: 95, y: 50 },
   ];
-  corners.forEach((c, i) => {
-    blobs.push({ x: c.x, y: c.y, size: 130, delay: 0.25 + i * 0.02 });
+  edges.forEach((c, i) => {
+    blobs.push({ x: c.x, y: c.y, size: 130, delay: 0.2 + i * 0.02 });
   });
+
+  const isExpanding = phase === "revealing" || phase === "fading";
 
   return (
     <div
       className="fixed inset-0 pointer-events-none"
       style={{
         zIndex: 60,
-        opacity: phase === "revealing" ? 0 : 1,
-        transition: "opacity 0.6s ease-out 1.4s",
+        opacity: phase === "fading" ? 0 : 1,
+        transition: phase === "fading" ? "opacity 0.5s ease-out" : "none",
       }}
     >
-      {/* Dark background */}
-      <div className="absolute inset-0 bg-[#0B0B0B]" />
-
-      {/* Gooey bubble container — blur + contrast makes circles merge */}
+      {/* Gooey container — blur + contrast makes white circles merge into liquid */}
       <div
-        className="absolute inset-0"
-        style={{ filter: "blur(20px) contrast(30)" }}
+        className="absolute inset-0 overflow-hidden"
+        style={{ filter: "blur(18px) contrast(25)" }}
       >
-        {/* Base dark fill for the contrast filter to work against */}
+        {/* Dark base — the "void" */}
         <div className="absolute inset-0 bg-[#0B0B0B]" />
 
-        {/* Expanding white circles that "eat" the dark layer */}
+        {/* Expanding white circles — they "burn through" the dark layer */}
         {blobs.map((blob, i) => (
           <div
             key={i}
@@ -97,8 +107,8 @@ export default function StencilReveal() {
             style={{
               left: `${blob.x}%`,
               top: `${blob.y}%`,
-              width: phase === "revealing" ? `${blob.size}vmax` : "0px",
-              height: phase === "revealing" ? `${blob.size}vmax` : "0px",
+              width: isExpanding ? `${blob.size}vmax` : "0px",
+              height: isExpanding ? `${blob.size}vmax` : "0px",
               transform: "translate(-50%, -50%)",
               transition: `width 1.2s cubic-bezier(0.22, 1, 0.36, 1) ${blob.delay}s, height 1.2s cubic-bezier(0.22, 1, 0.36, 1) ${blob.delay}s`,
             }}
