@@ -43,14 +43,14 @@ export default function Nav() {
             <a
               key={link.href}
               href={link.href}
-              className="text-xs font-medium tracking-wider uppercase text-lavender/40 hover:text-lime transition-colors duration-200"
+              className="text-xs font-medium tracking-wider uppercase text-lavender/40 hover:text-lime transition-colors duration-200 link-reveal"
             >
               {link.label}
             </a>
           ))}
           <a
             href={content.nav.cta.href}
-            className="text-xs font-semibold tracking-widest uppercase bg-lime text-ink px-5 py-3 hover:opacity-90 transition-opacity"
+            className="text-xs font-semibold tracking-widest uppercase bg-lime text-ink px-5 py-3 btn-lift active:scale-95"
           >
             {content.nav.cta.label}
           </a>

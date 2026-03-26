@@ -10,10 +10,22 @@ import Partner from "@/components/Partner";
 import Founders from "@/components/Founders";
 import FinalCta from "@/components/FinalCta";
 import Footer from "@/components/Footer";
+import GlobalBubbles from "@/components/GlobalBubbles";
+import StencilReveal from "@/components/StencilReveal";
+import CustomCursor from "@/components/CustomCursor";
 
 export default function Home() {
   return (
     <>
+      {/* Custom circle cursor — mix-blend-mode: difference */}
+      <CustomCursor />
+
+      {/* Viscous bubble stencil reveal — dark void that dissolves on load */}
+      <StencilReveal />
+
+      {/* Global interactive bubble field — covers entire page, reacts to cursor */}
+      <GlobalBubbles count={70} />
+
       <Nav />
       <main>
         <Hero />
