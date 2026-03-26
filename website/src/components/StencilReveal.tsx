@@ -1,120 +1,142 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback, useRef } from "react";
 
 /*
-  Viscous Bubble Stencil Reveal
+  Bubble Grid Reveal — inspired by disenopublico.org's PixelatedLoader
+  but using circles instead of geometric squares.
 
-  A solid dark overlay covers the viewport on load.
-  White circles expand with gooey filter (blur + contrast) applied,
-  making them merge into a liquid pool that "eats away" the dark layer.
-  After the reveal, the whole overlay fades out and unmounts.
+  A fixed overlay of dark circles covers the viewport.
+  On load, each circle fades out and shrinks with a staggered random delay,
+  revealing the hero underneath. The randomised timing creates an organic,
+  fluid-like dissolve effect.
+
+  Each circle has:
+  - Slight 3D depth via radial gradient (lighter center, dark edge)
+  - Random size variation for organic feel
+  - Scale + opacity + blur transition for a soft, fluid disappearance
+  - Staggered random delay so the reveal feels like bubbles popping
 */
 
-interface Blob {
+interface Cell {
+  key: string;
+  delay: number;
+  size: number;
   x: number;
   y: number;
-  size: number;
-  delay: number;
 }
 
 export default function StencilReveal() {
-  const [phase, setPhase] = useState<"covering" | "revealing" | "fading" | "done">(
-    "covering"
-  );
+  const [cells, setCells] = useState<Cell[]>([]);
+  const [revealing, setRevealing] = useState(false);
+  const [fadeOut, setFadeOut] = useState(false);
+  const [done, setDone] = useState(false);
+  const idRef = useRef(0);
+
+  const buildGrid = useCallback(() => {
+    const w = window.innerWidth;
+    const h = window.innerHeight;
+    // Circle diameter — larger circles = fewer cells = better performance
+    const baseDiam = Math.max(40, Math.min(60, w / 28));
+    const cols = Math.ceil(w / (baseDiam * 0.85)) + 2;
+    const rows = Math.ceil(h / (baseDiam * 0.85)) + 2;
+    const id = ++idRef.current;
+
+    const result: Cell[] = [];
+    for (let row = 0; row < rows; row++) {
+      for (let col = 0; col < cols; col++) {
+        // Hex-grid offset for tighter packing
+        const offsetX = row % 2 === 0 ? 0 : baseDiam * 0.42;
+        const x = col * baseDiam * 0.85 + offsetX - baseDiam;
+        const y = row * baseDiam * 0.75 - baseDiam;
+
+        // Distance from center of screen — used for delay
+        const cx = w / 2;
+        const cy = h / 2;
+        const dist = Math.sqrt((x - cx) ** 2 + (y - cy) ** 2);
+        const maxDist = Math.sqrt(cx * cx + cy * cy);
+        const distFrac = dist / maxDist;
+
+        // Staggered delay: center reveals first, edges last
+        // Plus random jitter for organic feel
+        const baseDelay = distFrac * 1200;
+        const jitter = Math.random() * 600;
+        const delay = 200 + baseDelay + jitter;
+
+        // Random size variation
+        const size = baseDiam * (0.9 + Math.random() * 0.3);
+
+        result.push({
+          key: `${id}-${row}-${col}`,
+          delay,
+          size,
+          x,
+          y,
+        });
+      }
+    }
+    return result;
+  }, []);
 
   useEffect(() => {
-    // Start expanding blobs
-    const t1 = setTimeout(() => setPhase("revealing"), 150);
-    // After blobs have fully expanded, fade the whole thing out
-    const t2 = setTimeout(() => setPhase("fading"), 1800);
+    setCells(buildGrid());
+
+    // Start the reveal after a brief moment
+    const t1 = setTimeout(() => setRevealing(true), 80);
+
+    // Begin fading out the container after circles have mostly popped
+    const t2 = setTimeout(() => setFadeOut(true), 2600);
+
     // Remove from DOM
-    const t3 = setTimeout(() => setPhase("done"), 2400);
+    const t3 = setTimeout(() => setDone(true), 3200);
+
     return () => {
       clearTimeout(t1);
       clearTimeout(t2);
       clearTimeout(t3);
     };
-  }, []);
+  }, [buildGrid]);
 
-  if (phase === "done") return null;
-
-  // Generate blob positions — center outward
-  const blobs: Blob[] = [];
-  const cx = 50;
-  const cy = 50;
-  // Center blob — largest, first to expand
-  blobs.push({ x: cx, y: cy, size: 180, delay: 0 });
-  // Ring 1
-  for (let i = 0; i < 6; i++) {
-    const angle = (i / 6) * Math.PI * 2;
-    blobs.push({
-      x: cx + Math.cos(angle) * 25,
-      y: cy + Math.sin(angle) * 25,
-      size: 140,
-      delay: 0.06 + i * 0.03,
-    });
-  }
-  // Ring 2
-  for (let i = 0; i < 10; i++) {
-    const angle = (i / 10) * Math.PI * 2 + 0.3;
-    blobs.push({
-      x: cx + Math.cos(angle) * 50,
-      y: cy + Math.sin(angle) * 45,
-      size: 120,
-      delay: 0.12 + i * 0.02,
-    });
-  }
-  // Corner + edge fills
-  const edges = [
-    { x: 5, y: 5 },
-    { x: 95, y: 5 },
-    { x: 5, y: 95 },
-    { x: 95, y: 95 },
-    { x: 50, y: 5 },
-    { x: 50, y: 95 },
-    { x: 5, y: 50 },
-    { x: 95, y: 50 },
-  ];
-  edges.forEach((c, i) => {
-    blobs.push({ x: c.x, y: c.y, size: 130, delay: 0.2 + i * 0.02 });
-  });
-
-  const isExpanding = phase === "revealing" || phase === "fading";
+  if (done) return null;
 
   return (
     <div
       className="fixed inset-0 pointer-events-none"
       style={{
         zIndex: 60,
-        opacity: phase === "fading" ? 0 : 1,
-        transition: phase === "fading" ? "opacity 0.5s ease-out" : "none",
+        opacity: fadeOut ? 0 : 1,
+        transition: "opacity 0.5s ease-out",
+        background: "#0B0B0B",
       }}
     >
-      {/* Gooey container — blur + contrast makes white circles merge into liquid */}
-      <div
-        className="absolute inset-0 overflow-hidden"
-        style={{ filter: "blur(18px) contrast(25)" }}
-      >
-        {/* Dark base — the "void" */}
-        <div className="absolute inset-0 bg-[#0B0B0B]" />
-
-        {/* Expanding white circles — they "burn through" the dark layer */}
-        {blobs.map((blob, i) => (
-          <div
-            key={i}
-            className="absolute rounded-full bg-white"
-            style={{
-              left: `${blob.x}%`,
-              top: `${blob.y}%`,
-              width: isExpanding ? `${blob.size}vmax` : "0px",
-              height: isExpanding ? `${blob.size}vmax` : "0px",
-              transform: "translate(-50%, -50%)",
-              transition: `width 1.2s cubic-bezier(0.22, 1, 0.36, 1) ${blob.delay}s, height 1.2s cubic-bezier(0.22, 1, 0.36, 1) ${blob.delay}s`,
-            }}
-          />
-        ))}
-      </div>
+      {/* Grid of circles that pop/dissolve to reveal content */}
+      {cells.map((cell) => (
+        <div
+          key={cell.key}
+          style={{
+            position: "absolute",
+            left: cell.x,
+            top: cell.y,
+            width: cell.size,
+            height: cell.size,
+            borderRadius: "50%",
+            // 3D depth: lighter center (like a sphere lit from above-left)
+            background: revealing
+              ? "transparent"
+              : `radial-gradient(circle at 38% 35%, #1a1636 0%, #0B0B0B 60%, #050510 100%)`,
+            // Subtle rim highlight
+            boxShadow: revealing
+              ? "none"
+              : `inset 0 -1px 3px rgba(200,245,119,0.04), inset 0 1px 2px rgba(91,63,232,0.08)`,
+            // The pop transition — scale down, fade, slight blur
+            opacity: revealing ? 0 : 1,
+            transform: revealing ? "scale(0.3)" : "scale(1)",
+            filter: revealing ? "blur(4px)" : "blur(0px)",
+            transition: `opacity 0.8s cubic-bezier(0.22, 0.61, 0.36, 1) ${cell.delay}ms, transform 0.9s cubic-bezier(0.22, 0.61, 0.36, 1) ${cell.delay}ms, filter 0.7s ease ${cell.delay}ms, background 0.6s ease ${cell.delay}ms, box-shadow 0.5s ease ${cell.delay}ms`,
+            willChange: "opacity, transform",
+          }}
+        />
+      ))}
     </div>
   );
 }
