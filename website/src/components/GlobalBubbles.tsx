@@ -12,17 +12,15 @@ interface Bubble {
   phase: number;
   speed: number;
   opacity: number;
-  // Organic shape deformation
-  blobPhase: number;
-  blobAmp: number;
 }
 
-export default function GlobalBubbles({ count = 80 }: { count?: number }) {
+export default function GlobalBubbles({ count = 70 }: { count?: number }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const bubblesRef = useRef<Bubble[]>([]);
-  const mouseRef = useRef({ x: -1000, y: -1000 });
-  const animRef = useRef<number>(0);
+  const mouseRef = useRef({ x: -9999, y: -9999 });
   const scrollRef = useRef(0);
+  const animRef = useRef<number>(0);
+  const sizeRef = useRef({ w: 0, h: 0, docH: 0 });
 
   const handleMouseMove = useCallback((e: MouseEvent) => {
     mouseRef.current = { x: e.clientX, y: e.clientY };
@@ -38,38 +36,39 @@ export default function GlobalBubbles({ count = 80 }: { count?: number }) {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    let w = 0;
-    let h = 0;
-    let docH = 0;
-
     function resize() {
       const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
-      w = window.innerWidth;
-      h = window.innerHeight;
-      docH = document.documentElement.scrollHeight;
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+      const docH = Math.max(
+        document.documentElement.scrollHeight,
+        document.body.scrollHeight,
+        h * 5
+      );
+      sizeRef.current = { w, h, docH };
       canvas!.width = Math.floor(w * dpr);
       canvas!.height = Math.floor(h * dpr);
       canvas!.style.width = w + "px";
       canvas!.style.height = h + "px";
       ctx!.setTransform(dpr, 0, 0, dpr, 0, 0);
     }
+
     resize();
 
-    // Init bubbles spread across the full document height
+    // Init bubbles spread across the full page height
+    const { w, docH } = sizeRef.current;
     bubblesRef.current = Array.from({ length: count }, () => {
-      const r = 3 + Math.random() * 12;
+      const r = 4 + Math.random() * 14;
       return {
         x: Math.random() * w,
         y: Math.random() * docH,
         r,
         baseR: r,
-        vx: (Math.random() - 0.5) * 0.2,
-        vy: -0.08 - Math.random() * 0.25,
+        vx: (Math.random() - 0.5) * 0.3,
+        vy: -0.1 - Math.random() * 0.3,
         phase: Math.random() * Math.PI * 2,
-        speed: 0.15 + Math.random() * 0.5,
-        opacity: 0.15 + Math.random() * 0.6,
-        blobPhase: Math.random() * Math.PI * 2,
-        blobAmp: 0.08 + Math.random() * 0.15,
+        speed: 0.2 + Math.random() * 0.5,
+        opacity: 0.3 + Math.random() * 0.7,
       };
     });
 
@@ -81,17 +80,18 @@ export default function GlobalBubbles({ count = 80 }: { count?: number }) {
 
     function draw() {
       time += 0.016;
+      const { w, h, docH } = sizeRef.current;
       const scroll = scrollRef.current;
       const mx = mouseRef.current.x;
-      const my = mouseRef.current.y + scroll;
+      const my = mouseRef.current.y;
 
       ctx!.clearRect(0, 0, w, h);
 
       for (const b of bubblesRef.current) {
-        // Float motion
-        b.x += b.vx + Math.sin(time * b.speed + b.phase) * 0.15;
+        // Float
+        b.x += b.vx + Math.sin(time * b.speed + b.phase) * 0.2;
         b.y += b.vy;
-        b.r = b.baseR + Math.sin(time * b.speed * 1.3 + b.phase) * 1.5;
+        b.r = b.baseR + Math.sin(time * b.speed * 1.3 + b.phase) * 2;
 
         // Wrap vertically across full document
         if (b.y < -b.r * 3) {
@@ -102,70 +102,72 @@ export default function GlobalBubbles({ count = 80 }: { count?: number }) {
           b.y = -b.r * 2;
           b.x = Math.random() * w;
         }
-        // Wrap horizontally
         if (b.x < -b.r * 3) b.x = w + b.r;
         if (b.x > w + b.r * 3) b.x = -b.r;
 
-        // Only draw if visible in viewport
+        // Convert to screen space
         const screenY = b.y - scroll;
+
+        // Skip if not in viewport
         if (screenY < -b.r * 4 || screenY > h + b.r * 4) continue;
 
-        // Cursor repulsion
+        // Cursor interaction — repel + grow
         const dx = b.x - mx;
-        const dy = b.y - my;
+        const dy = screenY - my;
         const dist = Math.sqrt(dx * dx + dy * dy);
-        const repelRadius = 180;
+        const repelRadius = 200;
         let offsetX = 0;
         let offsetY = 0;
         let scaleBoost = 1;
 
-        if (dist < repelRadius && dist > 0) {
-          const force = (1 - dist / repelRadius) * 35;
+        if (dist < repelRadius && dist > 1) {
+          const force = (1 - dist / repelRadius) * 40;
           offsetX = (dx / dist) * force;
           offsetY = (dy / dist) * force;
-          scaleBoost = 1 + (1 - dist / repelRadius) * 0.4;
+          scaleBoost = 1 + (1 - dist / repelRadius) * 0.5;
         }
 
         const drawX = b.x + offsetX;
         const drawY = screenY + offsetY;
         const drawR = Math.max(b.r * scaleBoost, 1);
 
-        // Draw organic blob shape
+        // Draw circle with gradient fill for depth
+        const gradient = ctx!.createRadialGradient(
+          drawX - drawR * 0.3,
+          drawY - drawR * 0.3,
+          0,
+          drawX,
+          drawY,
+          drawR
+        );
+
+        // Color based on scroll position — lime on dark sections, violet on light
+        const viewportFrac = screenY / h;
+        const isLight =
+          viewportFrac > 0.0 && viewportFrac < 1.0
+            ? false // default to dark-section colors; sections handle their own bg
+            : true;
+
+        // Always use a subtle but visible bubble style
+        const alpha = 0.06 * b.opacity;
+        const rimAlpha = 0.1 * b.opacity;
+
+        // Use lime-green tint (matches brand)
+        gradient.addColorStop(0, `rgba(200, 245, 119, ${(alpha * 1.5).toFixed(3)})`);
+        gradient.addColorStop(0.7, `rgba(200, 245, 119, ${alpha.toFixed(3)})`);
+        gradient.addColorStop(1, `rgba(200, 245, 119, 0)`);
+
         ctx!.beginPath();
-        const points = 6;
-        for (let i = 0; i <= points; i++) {
-          const angle = (i / points) * Math.PI * 2;
-          const deform =
-            1 +
-            Math.sin(angle * 3 + time * b.speed + b.blobPhase) * b.blobAmp +
-            Math.sin(angle * 2 - time * 0.7 + b.phase) * b.blobAmp * 0.5;
-          const px = drawX + Math.cos(angle) * drawR * deform;
-          const py = drawY + Math.sin(angle) * drawR * deform;
-          if (i === 0) ctx!.moveTo(px, py);
-          else ctx!.lineTo(px, py);
-        }
-        ctx!.closePath();
-
-        // Color based on vertical position in document
-        const docFrac = b.y / docH;
-        const isLightSection =
-          docFrac > 0.1 && docFrac < 0.25 ||
-          docFrac > 0.4 && docFrac < 0.55 ||
-          docFrac > 0.65 && docFrac < 0.8;
-
-        if (isLightSection) {
-          // Violet bubbles on light backgrounds
-          ctx!.fillStyle = `rgba(91,63,232,${(0.04 * b.opacity).toFixed(3)})`;
-        } else {
-          // Lime bubbles on dark backgrounds
-          ctx!.fillStyle = `rgba(200,245,119,${(0.035 * b.opacity).toFixed(3)})`;
-        }
+        ctx!.arc(drawX, drawY, drawR, 0, Math.PI * 2);
+        ctx!.fillStyle = gradient;
         ctx!.fill();
 
-        // Subtle lime rim glow on larger bubbles
-        if (drawR > 6) {
-          ctx!.strokeStyle = `rgba(200,245,119,${(0.03 * b.opacity).toFixed(3)})`;
-          ctx!.lineWidth = 0.5;
+        // Rim highlight
+        if (drawR > 5) {
+          ctx!.beginPath();
+          ctx!.arc(drawX, drawY, drawR, 0, Math.PI * 2);
+          ctx!.strokeStyle = `rgba(200, 245, 119, ${rimAlpha.toFixed(3)})`;
+          ctx!.lineWidth = 0.8;
           ctx!.stroke();
         }
       }
@@ -186,8 +188,8 @@ export default function GlobalBubbles({ count = 80 }: { count?: number }) {
   return (
     <canvas
       ref={canvasRef}
-      className="fixed inset-0 w-full h-full pointer-events-none"
-      style={{ zIndex: 5 }}
+      className="fixed inset-0 pointer-events-none"
+      style={{ zIndex: 2 }}
     />
   );
 }

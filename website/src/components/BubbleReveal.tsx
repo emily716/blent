@@ -119,3 +119,37 @@ export function BubbleRevealCard({
     </motion.div>
   );
 }
+
+/* Clip-path vertical reveal for images — matches disenopublico.org pattern */
+export function VisualReveal({
+  children,
+  className = "",
+  delay = 0,
+}: {
+  children: React.ReactNode;
+  className?: string;
+  delay?: number;
+}) {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
+
+  return (
+    <motion.div
+      ref={ref}
+      className={`overflow-hidden ${className}`}
+      initial={{ clipPath: "inset(0 0 100% 0)" }}
+      animate={
+        isInView
+          ? { clipPath: "inset(0 0 0% 0)" }
+          : { clipPath: "inset(0 0 100% 0)" }
+      }
+      transition={{
+        duration: 1.1,
+        delay,
+        ease: [0.22, 0.61, 0.36, 1],
+      }}
+    >
+      {children}
+    </motion.div>
+  );
+}
