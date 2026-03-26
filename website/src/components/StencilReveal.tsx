@@ -1,194 +1,110 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 /*
   Viscous Bubble Stencil Reveal
 
-  A solid dark overlay (#0B0B0B) covers the viewport on load.
-  Organic blob shapes spawn at center and expand outward,
-  "eating away" the dark layer to reveal the content underneath.
-
-  The gooey effect is achieved by applying CSS filter: blur() contrast()
-  to the mask container — this makes expanding blobs merge into a
-  single liquid pool as they grow, creating viscous fluid dynamics.
+  Dark overlay with expanding organic circles that reveal the page.
+  Uses CSS mask-image with radial gradients — no canvas compositing issues.
+  The gooey filter (blur + contrast) is applied to an inner div with
+  HTML-rendered circles, not canvas, so the filter works correctly.
 */
 
-interface RevealBlob {
+interface Blob {
   x: number;
   y: number;
-  r: number;
-  targetR: number;
-  speed: number;
+  size: number;
   delay: number;
-  pathIndex: number;
-  phase: number;
 }
 
-// Organic SVG-style blob deformations
-const blobPaths = [
-  // Path A offsets - organic splat
-  [0, 0.12, -0.08, 0.15, -0.1, 0.05, 0.13, -0.07, 0.1, -0.12, 0.06, -0.09],
-  // Path B offsets - rounder organic
-  [-0.05, 0.1, 0.08, -0.06, 0.12, -0.1, -0.08, 0.14, -0.05, 0.09, 0.07, -0.11],
-  // Path C offsets - elongated
-  [0.15, -0.05, 0.08, 0.12, -0.14, 0.06, 0.1, -0.08, -0.12, 0.1, 0.05, -0.07],
-];
-
 export default function StencilReveal() {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [revealed, setRevealed] = useState(false);
-  const [hidden, setHidden] = useState(false);
+  const [phase, setPhase] = useState<"covering" | "revealing" | "done">("covering");
 
   useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
-    const w = window.innerWidth;
-    const h = window.innerHeight;
-    canvas.width = w * dpr;
-    canvas.height = h * dpr;
-    canvas.style.width = w + "px";
-    canvas.style.height = h + "px";
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-
-    const cx = w / 2;
-    const cy = h / 2;
-    const maxR = Math.sqrt(w * w + h * h) * 0.7;
-
-    // Create reveal blobs — they spawn from center and expand
-    const numBlobs = 18;
-    const blobs: RevealBlob[] = Array.from({ length: numBlobs }, (_, i) => {
-      const angle = (i / numBlobs) * Math.PI * 2 + Math.random() * 0.3;
-      const dist = 20 + Math.random() * 60;
-      return {
-        x: cx + Math.cos(angle) * dist,
-        y: cy + Math.sin(angle) * dist,
-        r: 0,
-        targetR: maxR * (0.7 + Math.random() * 0.5),
-        speed: 0.8 + Math.random() * 0.6,
-        delay: i * 0.04 + Math.random() * 0.1,
-        pathIndex: i % blobPaths.length,
-        phase: Math.random() * Math.PI * 2,
-      };
-    });
-
-    let startTime: number | null = null;
-    let allDone = false;
-
-    function drawBlob(
-      ctx: CanvasRenderingContext2D,
-      x: number,
-      y: number,
-      r: number,
-      pathIndex: number,
-      phase: number,
-      time: number
-    ) {
-      const offsets = blobPaths[pathIndex];
-      const points = offsets.length;
-      ctx.beginPath();
-      for (let i = 0; i <= points; i++) {
-        const idx = i % points;
-        const angle = (idx / points) * Math.PI * 2;
-        const deform = 1 + offsets[idx] * Math.sin(time * 0.5 + phase + idx);
-        const px = x + Math.cos(angle) * r * deform;
-        const py = y + Math.sin(angle) * r * deform;
-        if (i === 0) ctx.moveTo(px, py);
-        else ctx.lineTo(px, py);
-      }
-      ctx.closePath();
-    }
-
-    function animate(ts: number) {
-      if (!startTime) startTime = ts;
-      const elapsed = (ts - startTime) / 1000;
-
-      // Fill entire canvas with dark void
-      ctx!.fillStyle = "#0B0B0B";
-      ctx!.fillRect(0, 0, w, h);
-
-      // Cut out the reveal blobs using destination-out compositing
-      ctx!.globalCompositeOperation = "destination-out";
-
-      let completedCount = 0;
-
-      for (const blob of blobs) {
-        const t = Math.max(0, elapsed - blob.delay);
-        if (t <= 0) continue;
-
-        // Ease-out expansion
-        const progress = 1 - Math.pow(1 - Math.min(t * blob.speed * 0.35, 1), 3);
-        blob.r = progress * blob.targetR;
-
-        if (progress >= 0.99) completedCount++;
-
-        // Draw the organic blob shape that "eats" the dark overlay
-        drawBlob(ctx!, blob.x, blob.y, blob.r, blob.pathIndex, blob.phase, elapsed);
-        ctx!.fillStyle = "rgba(0,0,0,1)";
-        ctx!.fill();
-      }
-
-      // Reset compositing
-      ctx!.globalCompositeOperation = "source-over";
-
-      // Add a subtle lime inner-glow at the edges of the reveal
-      if (elapsed < 3) {
-        ctx!.globalCompositeOperation = "destination-over";
-        for (const blob of blobs) {
-          if (blob.r < 10) continue;
-          const gradient = ctx!.createRadialGradient(
-            blob.x,
-            blob.y,
-            blob.r * 0.85,
-            blob.x,
-            blob.y,
-            blob.r * 1.05
-          );
-          gradient.addColorStop(0, "rgba(200,245,119,0)");
-          gradient.addColorStop(0.7, "rgba(200,245,119,0.06)");
-          gradient.addColorStop(1, "rgba(200,245,119,0)");
-          ctx!.fillStyle = gradient;
-          ctx!.fillRect(0, 0, w, h);
-        }
-        ctx!.globalCompositeOperation = "source-over";
-      }
-
-      if (completedCount >= blobs.length && !allDone) {
-        allDone = true;
-        setRevealed(true);
-        setTimeout(() => setHidden(true), 300);
-        return;
-      }
-
-      requestAnimationFrame(animate);
-    }
-
-    // Start reveal after a brief delay
-    const timer = setTimeout(() => {
-      requestAnimationFrame(animate);
-    }, 200);
-
-    return () => clearTimeout(timer);
+    // Start reveal shortly after mount
+    const t1 = setTimeout(() => setPhase("revealing"), 100);
+    // Remove from DOM after animation completes
+    const t2 = setTimeout(() => setPhase("done"), 2200);
+    return () => {
+      clearTimeout(t1);
+      clearTimeout(t2);
+    };
   }, []);
 
-  if (hidden) return null;
+  if (phase === "done") return null;
+
+  // Generate blob positions — spread from center outward
+  const blobs: Blob[] = [];
+  const cx = 50; // percent
+  const cy = 50;
+  // Center blob
+  blobs.push({ x: cx, y: cy, size: 180, delay: 0 });
+  // Ring 1
+  for (let i = 0; i < 6; i++) {
+    const angle = (i / 6) * Math.PI * 2;
+    blobs.push({
+      x: cx + Math.cos(angle) * 25,
+      y: cy + Math.sin(angle) * 25,
+      size: 140,
+      delay: 0.08 + i * 0.03,
+    });
+  }
+  // Ring 2
+  for (let i = 0; i < 10; i++) {
+    const angle = (i / 10) * Math.PI * 2 + 0.3;
+    blobs.push({
+      x: cx + Math.cos(angle) * 50,
+      y: cy + Math.sin(angle) * 45,
+      size: 120,
+      delay: 0.15 + i * 0.025,
+    });
+  }
+  // Corner fills
+  const corners = [
+    { x: 5, y: 5 }, { x: 95, y: 5 }, { x: 5, y: 95 }, { x: 95, y: 95 },
+    { x: 50, y: 5 }, { x: 50, y: 95 }, { x: 5, y: 50 }, { x: 95, y: 50 },
+  ];
+  corners.forEach((c, i) => {
+    blobs.push({ x: c.x, y: c.y, size: 130, delay: 0.25 + i * 0.02 });
+  });
 
   return (
-    <canvas
-      ref={canvasRef}
+    <div
       className="fixed inset-0 pointer-events-none"
       style={{
         zIndex: 60,
-        opacity: revealed ? 0 : 1,
-        transition: "opacity 0.3s ease-out",
-        // Gooey filter — makes blobs merge into viscous liquid pool
-        filter: "blur(12px) contrast(20)",
-        background: "#0B0B0B",
+        opacity: phase === "revealing" ? 0 : 1,
+        transition: "opacity 0.6s ease-out 1.4s",
       }}
-    />
+    >
+      {/* Dark background */}
+      <div className="absolute inset-0 bg-[#0B0B0B]" />
+
+      {/* Gooey bubble container — blur + contrast makes circles merge */}
+      <div
+        className="absolute inset-0"
+        style={{ filter: "blur(20px) contrast(30)" }}
+      >
+        {/* Base dark fill for the contrast filter to work against */}
+        <div className="absolute inset-0 bg-[#0B0B0B]" />
+
+        {/* Expanding white circles that "eat" the dark layer */}
+        {blobs.map((blob, i) => (
+          <div
+            key={i}
+            className="absolute rounded-full bg-white"
+            style={{
+              left: `${blob.x}%`,
+              top: `${blob.y}%`,
+              width: phase === "revealing" ? `${blob.size}vmax` : "0px",
+              height: phase === "revealing" ? `${blob.size}vmax` : "0px",
+              transform: "translate(-50%, -50%)",
+              transition: `width 1.2s cubic-bezier(0.22, 1, 0.36, 1) ${blob.delay}s, height 1.2s cubic-bezier(0.22, 1, 0.36, 1) ${blob.delay}s`,
+            }}
+          />
+        ))}
+      </div>
+    </div>
   );
 }
