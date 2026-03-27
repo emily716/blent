@@ -21,7 +21,7 @@ export default function WhatBlentDoes() {
   const { what } = content;
 
   return (
-    <section id="what" className="relative bg-fog py-32 sm:py-40 lg:py-48 micro-circles-dense">
+    <section id="what" className="relative bg-fog min-h-screen flex items-center py-32 sm:py-40 lg:py-48 micro-circles-dense">
       <div className="px-6 sm:px-10 max-w-[1400px] mx-auto">
         {/* 12-column grid: image left, text right */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-y-12 lg:gap-x-8 mb-20">

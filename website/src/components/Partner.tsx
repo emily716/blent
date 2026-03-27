@@ -20,7 +20,7 @@ export default function Partner() {
   const { partner } = content;
 
   return (
-    <section id="partner" className="relative bg-fog py-32 sm:py-40 lg:py-48 micro-circles-dense">
+    <section id="partner" className="relative bg-fog min-h-screen py-32 sm:py-40 lg:py-48 micro-circles-dense">
       <div className="px-6 sm:px-10 max-w-[1400px] mx-auto">
         {/* Intro text */}
         <div className="max-w-3xl mb-24">

@@ -30,7 +30,7 @@ export default function Industries() {
   return (
     <section
       id="industries"
-      className="relative bg-dark py-32 sm:py-40 lg:py-48 overflow-hidden"
+      className="relative bg-dark min-h-screen py-32 sm:py-40 lg:py-48 overflow-hidden"
     >
       <div className="absolute inset-0 micro-circles-light" />
 

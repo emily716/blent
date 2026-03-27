@@ -11,7 +11,7 @@ export const content = {
   },
 
   hero: {
-    sub: "Water-based. Bio-derived. Works as hard as the chemistry you're replacing — and lasts up to ten times longer.",
+    sub: "Water-based. Bio-derived.\nWorks as hard as the chemistry you're replacing — and lasts up to ten times longer.",
     cta: { label: "Become a pilot partner", href: "#partner" },
     ctaSecondary: { label: "See how it works", href: "#what" },
   },
@@ -23,7 +23,7 @@ export const content = {
       "Industrial cleaning chemistry has given manufacturers a false choice for decades. The effective options are toxic, flammable, or both. The safer alternatives don't work hard enough on the jobs that matter. The eco-friendly options are mostly petroleum chemistry with better packaging.",
       "So you absorb the cost and get on with it. The PPE, the ventilation, the hazardous waste collections, the health monitoring. The failed runs when the cleaning doesn't perform.",
       "Every year, the world uses 20 to 30 million tonnes of industrial cleaning chemistry. Most of it ends up in the air your workers breathe or the water table beneath your facility.",
-      "blent is the thing that didn't exist yet.\nBio-derived, genuinely effective, and honest about the distance still to travel.",
+      "blent is doing it differently.",
     ],
   },
 
@@ -33,7 +33,7 @@ export const content = {
     body: [
       "UV inks. Two-part resins. Baked-on carbon. The substrates that defeat standard aqueous cleaners and send manufacturers back to the toxic option.",
       "blent is water-based and bio-derived — which has always meant a compromise on performance. We've removed the compromise. Our liquid self-filters in use, lasting up to ten times longer than conventional chemistry before it needs replacing. Our gel is single-application, for the jobs that need precision.",
-      "No PPE. No hazardous waste collections. No compromise on performance.",
+      "Non-hazardous. Non-toxic. Non-carcinogenic. Non-flammable.",
     ],
     items: [
       "Resins",
@@ -41,6 +41,16 @@ export const content = {
       "UV inks",
       "Baked-on carbon",
       "Industrial grime",
+    ],
+  },
+
+  intervention: {
+    eyebrow: "Minimum intervention",
+    headline: "Minimum intervention.\nMaximum impact.",
+    body: [
+      "blent is designed to work with your existing process.",
+      "Our fluids last longer, go further, and leave less behind.",
+      "Less waste. Lower cost over time.",
     ],
   },
 

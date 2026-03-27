@@ -20,7 +20,7 @@ export default function FinalCta() {
   const { finalCta } = content;
 
   return (
-    <section className="relative bg-dark py-32 sm:py-40 lg:py-48 overflow-hidden">
+    <section className="relative bg-dark min-h-screen flex items-center py-32 sm:py-40 lg:py-48 overflow-hidden">
       <div className="absolute inset-0 micro-circles-light" />
 
       {/* Glow */}
