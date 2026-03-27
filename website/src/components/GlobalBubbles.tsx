@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useCallback } from "react";
+import { useEffect, useRef, useCallback, useState } from "react";
 
 interface Bubble {
   x: number;
@@ -21,6 +21,16 @@ export default function GlobalBubbles({ count = 70 }: { count?: number }) {
   const scrollRef = useRef(0);
   const animRef = useRef<number>(0);
   const sizeRef = useRef({ w: 0, h: 0, docH: 0 });
+  const [shouldRender, setShouldRender] = useState(true);
+
+  // Check prefers-reduced-motion and adjust count for mobile
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const mql = window.matchMedia("(prefers-reduced-motion: reduce)");
+    if (mql.matches) {
+      setShouldRender(false);
+    }
+  }, []);
 
   const handleMouseMove = useCallback((e: MouseEvent) => {
     mouseRef.current = { x: e.clientX, y: e.clientY };
@@ -31,10 +41,15 @@ export default function GlobalBubbles({ count = 70 }: { count?: number }) {
   }, []);
 
   useEffect(() => {
+    if (!shouldRender) return;
+
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
+
+    // Reduce bubble count on mobile
+    const effectiveCount = window.innerWidth < 768 ? Math.min(count, 50) : count;
 
     function resize() {
       const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
@@ -57,7 +72,7 @@ export default function GlobalBubbles({ count = 70 }: { count?: number }) {
 
     // Init bubbles spread across the full page height
     const { w, docH } = sizeRef.current;
-    bubblesRef.current = Array.from({ length: count }, () => {
+    bubblesRef.current = Array.from({ length: effectiveCount }, () => {
       const r = 4 + Math.random() * 14;
       return {
         x: Math.random() * w,
@@ -141,13 +156,6 @@ export default function GlobalBubbles({ count = 70 }: { count?: number }) {
           drawR
         );
 
-        // Color based on scroll position — lime on dark sections, violet on light
-        const viewportFrac = screenY / h;
-        const isLight =
-          viewportFrac > 0.0 && viewportFrac < 1.0
-            ? false // default to dark-section colors; sections handle their own bg
-            : true;
-
         // Always use a subtle but visible bubble style
         const alpha = 0.06 * b.opacity;
         const rimAlpha = 0.1 * b.opacity;
@@ -183,7 +191,9 @@ export default function GlobalBubbles({ count = 70 }: { count?: number }) {
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [count, handleMouseMove, handleScroll]);
+  }, [count, shouldRender, handleMouseMove, handleScroll]);
+
+  if (!shouldRender) return null;
 
   return (
     <canvas

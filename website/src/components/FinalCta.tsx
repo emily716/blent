@@ -35,7 +35,7 @@ export default function FinalCta() {
         <BubbleRevealText delay={0.35}>
           <a
             href={finalCta.cta.href}
-            className="inline-block text-sm font-semibold tracking-[0.1em] uppercase bg-lime text-ink px-10 py-5 hover:opacity-90 transition-opacity"
+            className="inline-block text-sm font-semibold tracking-[0.1em] uppercase bg-lime text-ink px-10 py-5 btn-lift active:scale-95"
           >
             {finalCta.cta.label}
           </a>

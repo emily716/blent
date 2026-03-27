@@ -27,14 +27,17 @@ export default function Industries() {
           </h2>
         </BubbleRevealText>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
+        {/* Bento-style grid: first card spans 2 columns */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-12">
           {industries.panels.map((panel, i) => (
             <BubbleRevealCard
               key={panel.number}
               delay={0.15 + i * 0.1}
-              className="bg-white/[0.04] border border-white/[0.06] p-6 sm:p-8 group hover:bg-white/[0.07] transition-colors duration-300"
+              className={`card-hover bg-white/[0.04] border border-white/[0.06] p-6 sm:p-8 group hover:bg-white/[0.07] transition-colors duration-300 ${
+                i === 0 ? "sm:col-span-2 lg:col-span-2" : ""
+              }`}
             >
-              <div className="text-lime/40 font-[family-name:var(--font-headline)] text-sm font-bold mb-4">
+              <div className="text-lime font-[family-name:var(--font-headline)] text-sm font-bold mb-4">
                 {panel.number}
               </div>
               <h3 className="font-[family-name:var(--font-headline)] text-white font-bold text-lg mb-3">
