@@ -20,7 +20,7 @@ export default function Intervention() {
   const { intervention } = content;
 
   return (
-    <section className="relative bg-lavender min-h-screen flex items-center py-32 sm:py-40 lg:py-48 micro-circles">
+    <section className="relative bg-lavender min-h-[85vh] flex items-center py-20 sm:py-32 lg:py-40 micro-circles">
       {/* Subtle horizontal divider at top */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[80%] max-w-[800px] h-[1px] bg-violet/10" />
 

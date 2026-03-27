@@ -30,7 +30,7 @@ export default function Industries() {
   return (
     <section
       id="industries"
-      className="relative bg-dark min-h-screen py-32 sm:py-40 lg:py-48 overflow-hidden"
+      className="relative bg-dark min-h-screen py-20 sm:py-32 lg:py-40 overflow-hidden"
     >
       <div className="absolute inset-0 micro-circles-light" />
 
@@ -60,7 +60,7 @@ export default function Industries() {
               {/* Industry image */}
               <div
                 className={`relative overflow-hidden ${
-                  i === 0 ? "h-48 sm:h-56" : "h-40 sm:h-48"
+                  i === 0 ? "h-40 sm:h-56" : "h-36 sm:h-48"
                 }`}
               >
                 <Image

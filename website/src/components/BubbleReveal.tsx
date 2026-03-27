@@ -66,16 +66,16 @@ export function BubbleRevealStat({
     >
       {/* Bubble accent behind the stat */}
       <motion.div
-        className="absolute -top-4 -left-4 rounded-full bg-lime/10"
+        className="absolute -top-3 -left-3 sm:-top-4 sm:-left-4 rounded-full bg-lime/10"
         initial={{ width: 0, height: 0 }}
-        animate={isInView ? { width: 80, height: 80 } : { width: 0, height: 0 }}
+        animate={isInView ? { width: 56, height: 56 } : { width: 0, height: 0 }}
         transition={{ duration: 0.9, delay: delay + 0.15, ease: "easeOut" }}
       />
       <div className="relative">
-        <div className="font-[family-name:var(--font-headline)] text-5xl sm:text-6xl lg:text-7xl font-800 text-lime leading-none mb-3">
+        <div className="font-[family-name:var(--font-headline)] text-3xl sm:text-5xl lg:text-7xl font-800 text-lime leading-none mb-2 sm:mb-3">
           {value}
         </div>
-        <div className="text-white/50 text-sm sm:text-base max-w-[240px] leading-relaxed">
+        <div className="text-white/50 text-xs sm:text-sm lg:text-base max-w-[240px] leading-relaxed">
           {label}
         </div>
       </div>

@@ -20,7 +20,7 @@ export default function FinalCta() {
   const { finalCta } = content;
 
   return (
-    <section className="relative bg-dark min-h-screen flex items-center py-32 sm:py-40 lg:py-48 overflow-hidden">
+    <section className="relative bg-dark min-h-screen flex items-center py-24 sm:py-32 lg:py-40 overflow-hidden">
       <div className="absolute inset-0 micro-circles-light" />
 
       {/* Glow */}
@@ -28,13 +28,16 @@ export default function FinalCta() {
 
       <div className="relative z-10 px-6 sm:px-10 max-w-[1400px] mx-auto text-center">
         <BubbleRevealText>
-          <h2 className="font-[family-name:var(--font-headline)] text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-800 text-white leading-tight tracking-[-0.02em] max-w-4xl mx-auto mb-10">
+          <h2
+            className="font-[family-name:var(--font-headline)] font-800 text-white leading-tight tracking-[-0.02em] max-w-5xl mx-auto mb-8 sm:mb-10"
+            style={{ fontSize: "clamp(28px, 4.5vw, 64px)" }}
+          >
             <Nl text={finalCta.headline} />
           </h2>
         </BubbleRevealText>
 
         <BubbleRevealText delay={0.2}>
-          <p className="text-lavender/50 text-base sm:text-lg max-w-xl mx-auto leading-[1.8] mb-12">
+          <p className="text-lavender/50 text-sm sm:text-base lg:text-lg max-w-xl mx-auto leading-[1.8] mb-10 sm:mb-12">
             {finalCta.sub}
           </p>
         </BubbleRevealText>
@@ -42,7 +45,7 @@ export default function FinalCta() {
         <BubbleRevealText delay={0.4}>
           <a
             href={finalCta.cta.href}
-            className="inline-block text-sm font-semibold tracking-[0.1em] uppercase bg-lime text-ink px-8 py-4 sm:px-10 sm:py-5 btn-lift active:scale-95"
+            className="inline-block text-xs sm:text-sm font-semibold tracking-[0.1em] uppercase bg-lime text-ink px-7 py-3.5 sm:px-10 sm:py-5 btn-lift active:scale-95"
           >
             {finalCta.cta.label}
           </a>

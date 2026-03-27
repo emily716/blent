@@ -21,16 +21,16 @@ export default function WhatBlentDoes() {
   const { what } = content;
 
   return (
-    <section id="what" className="relative bg-fog min-h-screen flex items-center py-32 sm:py-40 lg:py-48 micro-circles-dense">
+    <section id="what" className="relative bg-fog min-h-screen flex items-center py-20 sm:py-32 lg:py-40 micro-circles-dense">
       <div className="px-6 sm:px-10 max-w-[1400px] mx-auto">
         {/* 12-column grid: image left, text right */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-y-12 lg:gap-x-8 mb-20">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-y-10 lg:gap-x-8 mb-12 sm:mb-20">
           {/* Left: image placeholder (col-span-5) */}
           <div className="lg:col-span-5">
             <VisualReveal>
               <div
                 className="relative bg-dark overflow-hidden flex items-center justify-center"
-                style={{ aspectRatio: "4/5" }}
+                style={{ aspectRatio: "3/4" }}
               >
                 <Image
                   src="/images/product-wipe-clean.png"
