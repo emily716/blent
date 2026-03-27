@@ -40,7 +40,7 @@ export default function Founders() {
           </div>
 
           {/* Founder portraits — replace SVGs in /public/images/ with real photos */}
-          <div className="flex gap-6 lg:justify-end lg:mt-16">
+          <div className="flex gap-4 sm:gap-6 lg:justify-end lg:mt-16">
             {founders.people.map((person, i) => (
               <BubbleRevealText key={person.name} delay={0.3 + i * 0.12}>
                 <div className="text-center">
