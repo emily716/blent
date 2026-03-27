@@ -50,7 +50,12 @@ export default function Hero() {
           className="text-base sm:text-lg lg:text-xl text-lavender/50 max-w-2xl leading-relaxed mt-10 sm:mt-14"
           {...animProps(0.7)}
         >
-          {hero.sub}
+          {hero.sub.split("\n").map((line, i, arr) => (
+            <span key={i}>
+              {line}
+              {i < arr.length - 1 && <br />}
+            </span>
+          ))}
         </motion.p>
 
         <motion.div

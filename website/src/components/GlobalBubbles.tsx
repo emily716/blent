@@ -156,14 +156,13 @@ export default function GlobalBubbles({ count = 70 }: { count?: number }) {
           drawR
         );
 
-        // Always use a subtle but visible bubble style
-        const alpha = 0.06 * b.opacity;
-        const rimAlpha = 0.1 * b.opacity;
+        // Use violet tint — visible on both light and dark backgrounds
+        const alpha = 0.08 * b.opacity;
+        const rimAlpha = 0.12 * b.opacity;
 
-        // Use lime-green tint (matches brand)
-        gradient.addColorStop(0, `rgba(200, 245, 119, ${(alpha * 1.5).toFixed(3)})`);
-        gradient.addColorStop(0.7, `rgba(200, 245, 119, ${alpha.toFixed(3)})`);
-        gradient.addColorStop(1, `rgba(200, 245, 119, 0)`);
+        gradient.addColorStop(0, `rgba(91, 63, 232, ${(alpha * 1.8).toFixed(3)})`);
+        gradient.addColorStop(0.7, `rgba(91, 63, 232, ${alpha.toFixed(3)})`);
+        gradient.addColorStop(1, `rgba(91, 63, 232, 0)`);
 
         ctx!.beginPath();
         ctx!.arc(drawX, drawY, drawR, 0, Math.PI * 2);
@@ -174,7 +173,7 @@ export default function GlobalBubbles({ count = 70 }: { count?: number }) {
         if (drawR > 5) {
           ctx!.beginPath();
           ctx!.arc(drawX, drawY, drawR, 0, Math.PI * 2);
-          ctx!.strokeStyle = `rgba(200, 245, 119, ${rimAlpha.toFixed(3)})`;
+          ctx!.strokeStyle = `rgba(91, 63, 232, ${rimAlpha.toFixed(3)})`;
           ctx!.lineWidth = 0.8;
           ctx!.stroke();
         }

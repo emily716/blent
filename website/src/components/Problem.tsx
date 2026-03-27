@@ -20,7 +20,7 @@ export default function Problem() {
   const { problem } = content;
 
   return (
-    <section id="problem" className="relative bg-white py-32 sm:py-40 lg:py-48 micro-circles">
+    <section id="problem" className="relative bg-white min-h-screen flex items-center py-32 sm:py-40 lg:py-48 micro-circles">
       <div className="px-6 sm:px-10 max-w-[1400px] mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-y-12 lg:gap-x-8">
           {/* Left column: eyebrow + headline (cols 1-5) */}

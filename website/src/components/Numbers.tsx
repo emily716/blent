@@ -22,7 +22,7 @@ export default function Numbers() {
   return (
     <section
       id="numbers"
-      className="relative bg-dark py-32 sm:py-40 lg:py-48 overflow-hidden"
+      className="relative bg-dark min-h-screen flex items-center py-32 sm:py-40 lg:py-48 overflow-hidden"
     >
       <div className="absolute inset-0 micro-circles-light" />
 
