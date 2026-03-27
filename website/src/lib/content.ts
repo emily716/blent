@@ -11,8 +11,6 @@ export const content = {
   },
 
   hero: {
-    eyebrow: "Making clean, clean.",
-    headline: "We've built what comes next.",
     sub: "Water-based. Bio-derived. Works as hard as the chemistry you're replacing — and lasts up to ten times longer.",
     cta: { label: "Become a pilot partner", href: "#partner" },
     ctaSecondary: { label: "See how it works", href: "#what" },
@@ -20,18 +18,18 @@ export const content = {
 
   problem: {
     eyebrow: "The real cost",
-    headline: "You can do better. You just didn't know it.",
+    headline: "You can do better.\nYou just didn't know it.",
     body: [
       "Industrial cleaning chemistry has given manufacturers a false choice for decades. The effective options are toxic, flammable, or both. The safer alternatives don't work hard enough on the jobs that matter. The eco-friendly options are mostly petroleum chemistry with better packaging.",
       "So you absorb the cost and get on with it. The PPE, the ventilation, the hazardous waste collections, the health monitoring. The failed runs when the cleaning doesn't perform.",
       "Every year, the world uses 20 to 30 million tonnes of industrial cleaning chemistry. Most of it ends up in the air your workers breathe or the water table beneath your facility.",
-      "blent is the thing that didn't exist yet. Bio-derived, genuinely effective, and honest about the distance still to travel.",
+      "blent is the thing that didn't exist yet.\nBio-derived, genuinely effective, and honest about the distance still to travel.",
     ],
   },
 
   what: {
     eyebrow: "What blent does",
-    headline: "Removes what nothing else will. Then does it again.",
+    headline: "Removes what nothing else will.\nThen does it again.",
     body: [
       "UV inks. Two-part resins. Baked-on carbon. The substrates that defeat standard aqueous cleaners and send manufacturers back to the toxic option.",
       "blent is water-based and bio-derived — which has always meant a compromise on performance. We've removed the compromise. Our liquid self-filters in use, lasting up to ten times longer than conventional chemistry before it needs replacing. Our gel is single-application, for the jobs that need precision.",
@@ -52,9 +50,9 @@ export const content = {
       { value: "96%", label: "Fewer VOCs than solvent equivalents" },
       { value: "90%+", label: "Bio-derived or green-classified chemistry" },
       { value: "Up to 10×", label: "Longer active lifespan than conventional chemistry" },
-      { value: "100%", label: "Bio-derived target by 2030. We mean it." },
+      { value: "100%", label: "Bio-derived target by 2030.\nWe mean it." },
     ],
-    supporting: "The economics work. We'll show you exactly how.",
+    supporting: "The economics work.\nWe'll show you exactly how.",
   },
 
   chemistry: {
@@ -62,7 +60,7 @@ export const content = {
     headline: "Sourced with ambition.",
     body: [
       "Over 90% of our active chemistry is bio-derived or green-classified — drawn from suppliers at the leading edge of sustainable formulation. Honeysurf and RE:Chemistry are two of them.",
-      "We're not there yet. 100% bio-derived by 2030 is the target.",
+      "We're not there yet.\n100% bio-derived by 2030 is the target.",
     ],
     suppliers: [
       { name: "Honeysurf", desc: "Bio-surfactant innovation" },
@@ -72,7 +70,7 @@ export const content = {
 
   industries: {
     eyebrow: "Who we work with",
-    headline: "Built for manufacturers who clean hard.",
+    headline: "Built for manufacturers\nwho clean hard.",
     panels: [
       {
         number: "01",
@@ -101,7 +99,7 @@ export const content = {
   partner: {
     eyebrow: "Partner programme",
     headline:
-      "Be the first to eliminate hazardous cleaning from your operation entirely.",
+      "Be the first to eliminate hazardous cleaning\nfrom your operation entirely.",
     intro: [
       "A small number of manufacturers will prove this out with us this year. We're looking for them now.",
       "We learn your process, your products, your hardest cleaning challenge. We test blent against it in our lab and share every result. Then we come to you — on the floor, in real conditions. We work through it with you until it works. We don't declare victory until you do.",
@@ -131,7 +129,7 @@ export const content = {
   founders: {
     eyebrow: "Founders",
     headline: "Emily & Chris.",
-    subheadline: "There's a 30 million tonne problem. We're fixing it.",
+    subheadline: "There's a 30 million tonne problem.\nWe're fixing it.",
     body: [
       "Emily and Chris both read Chemistry at the University of Nottingham. Between them, they've spent their careers in education and scaling clean-tech businesses — including building one together. They know how this industry works, and they know it can work better.",
       "blent is their biggest swing yet. Novel chemistry. Cutting-edge bio-derived materials. Scaled at speed to have the largest possible positive impact on the planet.",
@@ -146,7 +144,7 @@ export const content = {
 
   finalCta: {
     headline:
-      "Think your product is too tough to clean without hazardous chemistry?",
+      "Think your product is too tough to clean\nwithout hazardous chemistry?",
     sub: "Send it to us. We'll test blent against it in our lab and share the full results. No obligation. No spin. If we can't match your current cleaner, we'll send you a cuppa for the trouble.",
     cta: {
       label: "Challenge our chemistry",

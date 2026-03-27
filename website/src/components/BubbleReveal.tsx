@@ -13,20 +13,20 @@ export function BubbleRevealText({
   delay?: number;
 }) {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-80px" });
+  const isInView = useInView(ref, { once: true, margin: "-60px" });
 
   return (
     <motion.div
       ref={ref}
       className={`relative ${className}`}
-      initial={{ opacity: 0, y: 24, scale: 0.97 }}
+      initial={{ opacity: 0, y: 32 }}
       animate={
         isInView
-          ? { opacity: 1, y: 0, scale: 1 }
-          : { opacity: 0, y: 24, scale: 0.97 }
+          ? { opacity: 1, y: 0 }
+          : { opacity: 0, y: 32 }
       }
       transition={{
-        duration: 0.7,
+        duration: 1.0,
         delay,
         ease: [0.22, 1, 0.36, 1],
       }}
@@ -52,14 +52,14 @@ export function BubbleRevealStat({
     <motion.div
       ref={ref}
       className="relative"
-      initial={{ opacity: 0, scale: 0.8 }}
+      initial={{ opacity: 0, y: 40 }}
       animate={
         isInView
-          ? { opacity: 1, scale: 1 }
-          : { opacity: 0, scale: 0.8 }
+          ? { opacity: 1, y: 0 }
+          : { opacity: 0, y: 40 }
       }
       transition={{
-        duration: 0.8,
+        duration: 1.1,
         delay,
         ease: [0.22, 1, 0.36, 1],
       }}
@@ -69,13 +69,13 @@ export function BubbleRevealStat({
         className="absolute -top-4 -left-4 rounded-full bg-lime/10"
         initial={{ width: 0, height: 0 }}
         animate={isInView ? { width: 80, height: 80 } : { width: 0, height: 0 }}
-        transition={{ duration: 0.6, delay: delay + 0.1, ease: "easeOut" }}
+        transition={{ duration: 0.9, delay: delay + 0.15, ease: "easeOut" }}
       />
       <div className="relative">
-        <div className="font-[family-name:var(--font-headline)] text-5xl sm:text-6xl lg:text-7xl font-bold text-lime leading-none mb-2">
+        <div className="font-[family-name:var(--font-headline)] text-5xl sm:text-6xl lg:text-7xl font-800 text-lime leading-none mb-3">
           {value}
         </div>
-        <div className="text-white/50 text-sm sm:text-base max-w-[240px]">
+        <div className="text-white/50 text-sm sm:text-base max-w-[240px] leading-relaxed">
           {label}
         </div>
       </div>
@@ -99,28 +99,20 @@ export function BubbleRevealCard({
     <motion.div
       ref={ref}
       className={`relative overflow-hidden ${className}`}
-      initial={{ opacity: 0, y: 30 }}
-      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+      initial={{ opacity: 0, y: 40 }}
+      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
       transition={{
-        duration: 0.7,
+        duration: 1.0,
         delay,
         ease: [0.22, 1, 0.36, 1],
       }}
     >
-      {/* Bubble pop mask */}
-      <motion.div
-        className="absolute inset-0 rounded-full bg-violet/5 pointer-events-none"
-        initial={{ scale: 0, opacity: 0.5 }}
-        animate={isInView ? { scale: 3, opacity: 0 } : { scale: 0, opacity: 0.5 }}
-        transition={{ duration: 1.2, delay: delay + 0.1, ease: "easeOut" }}
-        style={{ transformOrigin: "center center" }}
-      />
       {children}
     </motion.div>
   );
 }
 
-/* Clip-path vertical reveal for images — matches disenopublico.org pattern */
+/* Clip-path vertical reveal for images */
 export function VisualReveal({
   children,
   className = "",
@@ -131,7 +123,7 @@ export function VisualReveal({
   delay?: number;
 }) {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
     <motion.div
@@ -144,7 +136,7 @@ export function VisualReveal({
           : { clipPath: "inset(0 0 100% 0)" }
       }
       transition={{
-        duration: 1.1,
+        duration: 1.4,
         delay,
         ease: [0.22, 0.61, 0.36, 1],
       }}
