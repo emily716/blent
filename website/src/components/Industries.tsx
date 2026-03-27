@@ -42,7 +42,10 @@ export default function Industries() {
         </BubbleRevealText>
 
         <BubbleRevealText delay={0.15}>
-          <h2 className="font-[family-name:var(--font-headline)] text-3xl sm:text-4xl lg:text-5xl font-800 text-white leading-tight tracking-[-0.02em] mb-16">
+          <h2
+            className="font-[family-name:var(--font-headline)] font-800 text-white leading-tight tracking-[-0.02em] mb-12 sm:mb-16"
+            style={{ fontSize: "clamp(26px, 4.5vw, 48px)" }}
+          >
             <Nl text={industries.headline} />
           </h2>
         </BubbleRevealText>

@@ -109,7 +109,7 @@ export const content = {
   partner: {
     eyebrow: "Partner programme",
     headline:
-      "Be the first to eliminate hazardous cleaning\nfrom your operation entirely.",
+      "Be the first to eliminate hazardous\ncleaning from your operation entirely.",
     intro: [
       "A small number of manufacturers will prove this out with us this year. We're looking for them now.",
       "We learn your process, your products, your hardest cleaning challenge. We test blent against it in our lab and share every result. Then we come to you — on the floor, in real conditions. We work through it with you until it works. We don't declare victory until you do.",

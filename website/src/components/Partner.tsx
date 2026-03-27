@@ -23,7 +23,7 @@ export default function Partner() {
     <section id="partner" className="relative bg-fog min-h-screen py-20 sm:py-32 lg:py-40 micro-circles-dense">
       <div className="px-6 sm:px-10 max-w-[1400px] mx-auto">
         {/* Intro text */}
-        <div className="max-w-3xl mb-16 sm:mb-24">
+        <div className="mb-16 sm:mb-24">
           <BubbleRevealText>
             <div className="text-sm sm:text-base font-[family-name:var(--font-headline)] font-600 tracking-[0.15em] uppercase text-violet mb-6">
               {partner.eyebrow}
@@ -31,7 +31,10 @@ export default function Partner() {
           </BubbleRevealText>
 
           <BubbleRevealText delay={0.15}>
-            <h2 className="font-[family-name:var(--font-headline)] text-3xl sm:text-4xl lg:text-5xl font-800 text-ink leading-tight tracking-[-0.02em] mb-10">
+            <h2
+              className="font-[family-name:var(--font-headline)] font-800 text-ink leading-tight tracking-[-0.02em] mb-10"
+              style={{ fontSize: "clamp(26px, 4.5vw, 48px)" }}
+            >
               <Nl text={partner.headline} />
             </h2>
           </BubbleRevealText>

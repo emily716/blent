@@ -37,7 +37,10 @@ export default function Chemistry() {
             </BubbleRevealText>
 
             <BubbleRevealText delay={0.15}>
-              <h2 className="font-[family-name:var(--font-headline)] text-3xl sm:text-4xl lg:text-5xl font-800 text-ink leading-tight tracking-[-0.02em] mb-10">
+              <h2
+                className="font-[family-name:var(--font-headline)] font-800 text-ink leading-tight tracking-[-0.02em] mb-10"
+                style={{ fontSize: "clamp(26px, 4vw, 44px)" }}
+              >
                 {chemistry.headline}
               </h2>
             </BubbleRevealText>

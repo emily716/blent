@@ -37,13 +37,19 @@ export default function Founders() {
             </BubbleRevealText>
 
             <BubbleRevealText delay={0.15}>
-              <h2 className="font-[family-name:var(--font-headline)] text-3xl sm:text-4xl lg:text-5xl font-800 text-ink leading-tight tracking-[-0.02em] mb-3">
+              <h2
+                className="font-[family-name:var(--font-headline)] font-800 text-ink leading-tight tracking-[-0.02em] mb-3"
+                style={{ fontSize: "clamp(26px, 4vw, 44px)" }}
+              >
                 {founders.headline}
               </h2>
             </BubbleRevealText>
 
             <BubbleRevealText delay={0.2}>
-              <p className="font-[family-name:var(--font-headline)] text-xl sm:text-2xl font-600 text-violet leading-snug mb-10">
+              <p
+                className="font-[family-name:var(--font-headline)] font-600 text-violet leading-snug mb-10"
+                style={{ fontSize: "clamp(18px, 2.5vw, 28px)" }}
+              >
                 <Nl text={founders.subheadline} />
               </p>
             </BubbleRevealText>

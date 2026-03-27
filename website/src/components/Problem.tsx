@@ -32,7 +32,10 @@ export default function Problem() {
             </BubbleRevealText>
 
             <BubbleRevealText delay={0.15}>
-              <h2 className="font-[family-name:var(--font-headline)] text-3xl sm:text-4xl lg:text-5xl font-800 text-ink leading-tight tracking-[-0.02em]">
+              <h2
+                className="font-[family-name:var(--font-headline)] font-800 text-ink leading-tight tracking-[-0.02em]"
+                style={{ fontSize: "clamp(26px, 4vw, 44px)" }}
+              >
                 <Nl text={problem.headline} />
               </h2>
             </BubbleRevealText>
