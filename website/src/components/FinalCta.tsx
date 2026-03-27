@@ -2,7 +2,6 @@
 
 import { content } from "@/lib/content";
 import { BubbleRevealText } from "./BubbleReveal";
-import BubbleBackground from "./BubbleBackground";
 
 export default function FinalCta() {
   const { finalCta } = content;
@@ -13,8 +12,6 @@ export default function FinalCta() {
 
       {/* Glow */}
       <div className="absolute bottom-[-20%] left-[20%] w-[50vw] h-[50vw] max-w-[600px] max-h-[600px] bg-violet/[0.1] rounded-full blur-[100px] pointer-events-none" />
-
-      <BubbleBackground count={25} color="rgba(200,245,119,0.03)" />
 
       <div className="relative z-10 px-6 sm:px-10 max-w-[1400px] mx-auto text-center">
         <BubbleRevealText>
