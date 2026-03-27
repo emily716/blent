@@ -1,24 +1,39 @@
 "use client";
 
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 
 export default function VideoScroll() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    const section = sectionRef.current;
-    const video = videoRef.current;
-    if (!section || !video) return;
+    /* Detect mobile: touch device or narrow viewport */
+    const mobile =
+      window.innerWidth < 768 ||
+      "ontouchstart" in window ||
+      navigator.maxTouchPoints > 0;
+    setIsMobile(mobile);
 
-    /* Wait for video metadata so we know its duration */
+    const video = videoRef.current;
+    const section = sectionRef.current;
+    if (!video || !section) return;
+
+    if (mobile) {
+      /* Mobile: simple autoplay loop — scroll scrub is unreliable on iOS */
+      video.play().catch(() => {
+        /* Autoplay blocked — that's ok, user will see first frame */
+      });
+      return;
+    }
+
+    /* Desktop: scroll-scrub playback */
     const onReady = () => {
       const scrub = () => {
         const rect = section.getBoundingClientRect();
         const sectionHeight = section.offsetHeight - window.innerHeight;
         if (sectionHeight <= 0) return;
 
-        /* progress 0 → 1 as section scrolls through viewport */
         const raw = -rect.top / sectionHeight;
         const progress = Math.min(1, Math.max(0, raw));
 
@@ -28,7 +43,7 @@ export default function VideoScroll() {
       };
 
       window.addEventListener("scroll", scrub, { passive: true });
-      scrub(); /* initial position */
+      scrub();
       return () => window.removeEventListener("scroll", scrub);
     };
 
@@ -52,8 +67,8 @@ export default function VideoScroll() {
     <section
       ref={sectionRef}
       className="relative bg-dark"
-      /* 3× viewport height gives room to scrub through the video */
-      style={{ height: "300vh" }}
+      /* Desktop: 300vh for scroll-scrub room. Mobile: single viewport */
+      style={{ height: isMobile ? "100vh" : "300vh" }}
     >
       <div className="sticky top-0 h-screen w-full overflow-hidden">
         {/* Mask to crop the bottom-right VEO watermark */}
@@ -69,11 +84,13 @@ export default function VideoScroll() {
             muted
             playsInline
             preload="auto"
+            loop={isMobile}
+            autoPlay={isMobile}
             className="w-full h-full object-cover"
           />
         </div>
 
-        {/* Additional mask: cover bottom-right corner specifically */}
+        {/* Cover bottom-right corner where watermark sits */}
         <div
           className="absolute bottom-0 right-0 w-[140px] h-[50px] bg-dark z-10"
           aria-hidden="true"
