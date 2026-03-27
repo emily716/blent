@@ -21,8 +21,8 @@ export default function Founders() {
   const { founders } = content;
 
   const founderImages: Record<string, string> = {
-    Emily: "/images/placeholder-founder-emily.svg",
-    Chris: "/images/placeholder-founder-chris.svg",
+    Emily: "/images/founder-emily.jpeg",
+    Chris: "/images/founder-chris.jpg",
   };
 
   return (
@@ -68,7 +68,9 @@ export default function Founders() {
                       alt={person.name}
                       width={144}
                       height={144}
-                      className="w-full h-full object-cover"
+                      className={`w-full h-full object-cover ${
+                        person.name === "Chris" ? "grayscale" : ""
+                      }`}
                     />
                   </div>
                   <h3 className="font-[family-name:var(--font-headline)] font-bold text-ink text-base">

@@ -31,9 +31,9 @@ export default function Nav() {
           <Image
             src="/logo.svg"
             alt="blent"
-            width={36}
-            height={44}
-            className="h-9 w-auto"
+            width={120}
+            height={36}
+            className="h-8 sm:h-10 w-auto"
           />
         </a>
 

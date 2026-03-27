@@ -18,8 +18,8 @@ function Nl({ text }: { text: string }) {
 }
 
 const supplierLogos: Record<string, string> = {
-  Honeysurf: "/images/placeholder-supplier-honeysurf.svg",
-  "RE:Chemistry": "/images/placeholder-supplier-rechemistry.svg",
+  Holiferm: "/images/supplier-holiferm.png",
+  "RE:Chemistry": "/images/supplier-rechemistry.webp",
 };
 
 export default function Chemistry() {

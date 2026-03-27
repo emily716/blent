@@ -14,9 +14,9 @@ export default function Footer() {
             <Image
               src="/logo.svg"
               alt="blent"
-              width={28}
-              height={34}
-              className="h-7 w-auto opacity-60"
+              width={100}
+              height={30}
+              className="h-8 w-auto opacity-60"
             />
             <span className="text-lavender/30 text-sm">{footer.tagline}</span>
           </div>
