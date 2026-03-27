@@ -31,9 +31,8 @@ export default function Founders() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-start">
           <div>
             <BubbleRevealText>
-              <div className="text-xs font-semibold tracking-[0.28em] uppercase text-violet mb-5 flex items-center gap-2">
+              <div className="text-sm sm:text-base font-[family-name:var(--font-headline)] font-600 tracking-[0.15em] uppercase text-violet mb-6">
                 {founders.eyebrow}
-                <span className="block w-6 h-[1px] bg-violet" />
               </div>
             </BubbleRevealText>
 

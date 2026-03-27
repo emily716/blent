@@ -2,7 +2,6 @@ import Nav from "@/components/Nav";
 import Hero from "@/components/Hero";
 import Problem from "@/components/Problem";
 import WhatBlentDoes from "@/components/WhatBlentDoes";
-import VideoScroll from "@/components/VideoScroll";
 import Numbers from "@/components/Numbers";
 import Chemistry from "@/components/Chemistry";
 import Industries from "@/components/Industries";
@@ -26,7 +25,6 @@ export default function Home() {
         <Hero />
         <Problem />
         <WhatBlentDoes />
-        <VideoScroll />
         <Numbers />
         <Chemistry />
         <Industries />

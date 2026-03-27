@@ -28,9 +28,8 @@ export default function Industries() {
 
       <div className="relative z-10 px-6 sm:px-10 max-w-[1400px] mx-auto">
         <BubbleRevealText>
-          <div className="text-xs font-semibold tracking-[0.28em] uppercase text-lime/70 mb-5 flex items-center gap-2">
+          <div className="text-sm sm:text-base font-[family-name:var(--font-headline)] font-600 tracking-[0.15em] uppercase text-lime/80 mb-6">
             {industries.eyebrow}
-            <span className="block w-6 h-[1px] bg-lime/30" />
           </div>
         </BubbleRevealText>
 
