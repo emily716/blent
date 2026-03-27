@@ -3,37 +3,49 @@
 import { content } from "@/lib/content";
 import { BubbleRevealText } from "./BubbleReveal";
 
+function Nl({ text }: { text: string }) {
+  return (
+    <>
+      {text.split("\n").map((line, i, arr) => (
+        <span key={i}>
+          {line}
+          {i < arr.length - 1 && <br />}
+        </span>
+      ))}
+    </>
+  );
+}
+
 export default function Partner() {
   const { partner } = content;
 
   return (
-    <section id="partner" className="relative bg-fog py-24 sm:py-32 micro-circles-dense">
+    <section id="partner" className="relative bg-fog py-32 sm:py-40 lg:py-48 micro-circles-dense">
       <div className="px-6 sm:px-10 max-w-[1400px] mx-auto">
         {/* Intro text */}
-        <div className="max-w-3xl mb-20">
+        <div className="max-w-3xl mb-24">
           <BubbleRevealText>
-            <div className="text-xs font-semibold tracking-[0.28em] uppercase text-violet mb-4 flex items-center gap-2">
+            <div className="text-sm sm:text-base font-[family-name:var(--font-headline)] font-600 tracking-[0.15em] uppercase text-violet mb-6">
               {partner.eyebrow}
-              <span className="block w-6 h-[1px] bg-violet" />
             </div>
           </BubbleRevealText>
 
-          <BubbleRevealText delay={0.1}>
-            <h2 className="font-[family-name:var(--font-headline)] text-3xl sm:text-4xl lg:text-5xl font-bold text-ink leading-tight tracking-tight mb-8">
-              {partner.headline}
+          <BubbleRevealText delay={0.15}>
+            <h2 className="font-[family-name:var(--font-headline)] text-3xl sm:text-4xl lg:text-5xl font-800 text-ink leading-tight tracking-[-0.02em] mb-10">
+              <Nl text={partner.headline} />
             </h2>
           </BubbleRevealText>
 
           {partner.intro.map((para, i) => (
-            <BubbleRevealText key={i} delay={0.15 + i * 0.08}>
-              <p className="text-slate text-base sm:text-lg leading-relaxed mb-4">
+            <BubbleRevealText key={i} delay={0.2 + i * 0.12}>
+              <p className="text-slate text-base sm:text-lg leading-[1.8] mb-5">
                 {para}
               </p>
             </BubbleRevealText>
           ))}
 
-          <BubbleRevealText delay={0.3}>
-            <p className="text-slate text-base sm:text-lg leading-relaxed">
+          <BubbleRevealText delay={0.4}>
+            <p className="text-slate text-base sm:text-lg leading-[1.8]">
               {partner.offer}
             </p>
           </BubbleRevealText>
@@ -53,21 +65,21 @@ export default function Partner() {
             aria-hidden="true"
           />
 
-          <div className="flex flex-col gap-16 lg:gap-20">
+          <div className="flex flex-col gap-20 lg:gap-24">
             {partner.steps.map((step, i) => {
               const isOdd = i % 2 === 0;
               return (
-                <BubbleRevealText key={step.title} delay={0.4 + i * 0.12}>
+                <BubbleRevealText key={step.title} delay={0.5 + i * 0.15}>
                   <div className="relative">
                     {/* Dot on center line — desktop */}
                     <div
-                      className="hidden lg:block absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-lime z-10"
+                      className="hidden lg:block absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-lime z-10"
                       aria-hidden="true"
                     />
 
                     {/* Dot on left line — mobile */}
                     <div
-                      className="lg:hidden absolute left-4 -translate-x-1/2 top-3 w-2 h-2 rounded-full bg-lime z-10"
+                      className="lg:hidden absolute left-4 -translate-x-1/2 top-3 w-3 h-3 rounded-full bg-lime z-10"
                       aria-hidden="true"
                     />
 
@@ -75,14 +87,12 @@ export default function Partner() {
                     <div className="hidden lg:grid lg:grid-cols-2 lg:gap-0 items-center">
                       {isOdd ? (
                         <>
-                          {/* Title on LEFT */}
                           <div className="flex items-center justify-end pr-8">
-                            <div className="border border-violet/30 px-4 py-2">
+                            <div className="border border-violet/30 px-5 py-3">
                               <span className="text-xs font-semibold tracking-[0.15em] uppercase text-ink">
                                 {step.title}
                               </span>
                             </div>
-                            {/* Dashed connector */}
                             <div
                               className="w-8 h-[1px] flex-shrink-0"
                               style={{
@@ -92,7 +102,6 @@ export default function Partner() {
                               aria-hidden="true"
                             />
                           </div>
-                          {/* Description on RIGHT */}
                           <div className="pl-8">
                             <div className="flex items-center">
                               <div
@@ -111,7 +120,6 @@ export default function Partner() {
                         </>
                       ) : (
                         <>
-                          {/* Description on LEFT */}
                           <div className="flex items-center justify-end pr-8">
                             <p className="text-slate text-sm sm:text-base leading-relaxed mr-4 max-w-sm text-right">
                               {step.desc}
@@ -125,7 +133,6 @@ export default function Partner() {
                               aria-hidden="true"
                             />
                           </div>
-                          {/* Title on RIGHT */}
                           <div className="pl-8">
                             <div className="flex items-center">
                               <div
@@ -136,7 +143,7 @@ export default function Partner() {
                                 }}
                                 aria-hidden="true"
                               />
-                              <div className="border border-violet/30 px-4 py-2 ml-4">
+                              <div className="border border-violet/30 px-5 py-3 ml-4">
                                 <span className="text-xs font-semibold tracking-[0.15em] uppercase text-ink">
                                   {step.title}
                                 </span>
@@ -147,9 +154,9 @@ export default function Partner() {
                       )}
                     </div>
 
-                    {/* Mobile layout — always left-aligned */}
+                    {/* Mobile layout */}
                     <div className="lg:hidden pl-10">
-                      <div className="border border-violet/30 px-4 py-2 inline-block mb-2">
+                      <div className="border border-violet/30 px-5 py-3 inline-block mb-3">
                         <span className="text-xs font-semibold tracking-[0.15em] uppercase text-ink">
                           {step.title}
                         </span>

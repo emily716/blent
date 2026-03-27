@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "blent — Make clean, clean.",
+  title: "blent — Making clean, clean.",
   description:
-    "Industrial-strength cleaning without the hazardous chemistry. Water-based. Bio-derived. Reusable.",
+    "Water-based. Bio-derived. Works as hard as the chemistry you're replacing — and lasts up to ten times longer.",
 };
 
 export default function RootLayout({
@@ -22,7 +22,7 @@ export default function RootLayout({
           crossOrigin="anonymous"
         />
         <link
-          href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap"
           rel="stylesheet"
         />
       </head>

@@ -10,7 +10,7 @@
   --color-slate: #6B6880;
   --color-ink: #100D26;
 
-  --font-headline: "Space Grotesk", sans-serif;
+  --font-headline: "Syne", sans-serif;
   --font-body: "Inter", sans-serif;
 }
 
@@ -55,7 +55,7 @@ body {
   background-size: 16px 16px;
 }
 
-/* Vertical clip-path reveal for images — like disenopublico.org */
+/* Vertical clip-path reveal for images */
 @keyframes dp-vertical-reveal {
   0% { clip-path: inset(0 0 100%); }
   100% { clip-path: inset(0); }
@@ -94,7 +94,7 @@ body {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 .card-hover:hover {
-  transform: scale(1.03);
+  transform: scale(1.02);
   box-shadow: 0 8px 24px rgba(0,0,0,0.1);
 }
 .card-hover:active {
