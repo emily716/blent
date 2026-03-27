@@ -34,11 +34,11 @@ export default function Hero() {
       {/* Radial glow */}
       <div className="absolute top-[-10%] right-[-5%] w-[60vw] h-[60vw] max-w-[700px] max-h-[700px] bg-violet/[0.12] rounded-full blur-[120px] pointer-events-none" />
 
-      <div className="relative z-10 px-6 sm:px-10 max-w-[1400px] mx-auto w-full pb-24 sm:pb-32 lg:pb-40">
+      <div className="relative z-10 px-6 sm:px-10 max-w-[1400px] mx-auto w-full pb-16 sm:pb-28 lg:pb-36">
         {/* Single hero title — large editorial display */}
         <motion.h1
           className="font-[family-name:var(--font-headline)] font-800 text-white leading-[0.92] tracking-[-0.03em]"
-          style={{ fontSize: "clamp(64px, 10vw, 160px)" }}
+          style={{ fontSize: "clamp(48px, 10vw, 160px)" }}
           {...animProps(0.4)}
         >
           Making clean,
@@ -47,7 +47,7 @@ export default function Hero() {
         </motion.h1>
 
         <motion.p
-          className="text-base sm:text-lg lg:text-xl text-lavender/50 max-w-2xl leading-relaxed mt-10 sm:mt-14"
+          className="text-sm sm:text-base lg:text-xl text-lavender/50 max-w-2xl leading-relaxed mt-8 sm:mt-12"
           {...animProps(0.7)}
         >
           {hero.sub.split("\n").map((line, i, arr) => (
@@ -59,12 +59,12 @@ export default function Hero() {
         </motion.p>
 
         <motion.div
-          className="flex flex-wrap items-center gap-5 mt-10"
+          className="flex flex-wrap items-center gap-4 sm:gap-5 mt-8 sm:mt-10"
           {...animProps(1.0)}
         >
           <a
             href={hero.cta.href}
-            className="inline-block text-xs font-semibold tracking-[0.12em] uppercase bg-lime text-ink px-8 py-4 sm:px-10 sm:py-5 btn-lift active:scale-95"
+            className="inline-block text-xs font-semibold tracking-[0.12em] uppercase bg-lime text-ink px-6 py-3.5 sm:px-10 sm:py-5 btn-lift active:scale-95"
           >
             {hero.cta.label}
           </a>

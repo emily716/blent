@@ -26,9 +26,9 @@ export default function Founders() {
   };
 
   return (
-    <section id="founders" className="relative bg-lavender min-h-screen flex items-center py-32 sm:py-40 lg:py-48 micro-circles">
+    <section id="founders" className="relative bg-lavender min-h-screen flex items-center py-20 sm:py-32 lg:py-40 micro-circles">
       <div className="px-6 sm:px-10 max-w-[1400px] mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
           <div>
             <BubbleRevealText>
               <div className="text-sm sm:text-base font-[family-name:var(--font-headline)] font-600 tracking-[0.15em] uppercase text-violet mb-6">

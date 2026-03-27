@@ -22,7 +22,7 @@ export default function Numbers() {
   return (
     <section
       id="numbers"
-      className="relative bg-dark min-h-screen flex items-center py-32 sm:py-40 lg:py-48 overflow-hidden"
+      className="relative bg-dark min-h-screen flex items-center py-20 sm:py-32 lg:py-40 overflow-hidden"
     >
       <div className="absolute inset-0 micro-circles-light" />
 
@@ -33,7 +33,7 @@ export default function Numbers() {
           </div>
         </BubbleRevealText>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 sm:gap-8 mb-20">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-8 mb-14 sm:mb-20">
           {numbers.stats.map((stat, i) => (
             <BubbleRevealStat
               key={stat.value}

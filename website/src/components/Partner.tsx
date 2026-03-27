@@ -20,10 +20,10 @@ export default function Partner() {
   const { partner } = content;
 
   return (
-    <section id="partner" className="relative bg-fog min-h-screen py-32 sm:py-40 lg:py-48 micro-circles-dense">
+    <section id="partner" className="relative bg-fog min-h-screen py-20 sm:py-32 lg:py-40 micro-circles-dense">
       <div className="px-6 sm:px-10 max-w-[1400px] mx-auto">
         {/* Intro text */}
-        <div className="max-w-3xl mb-24">
+        <div className="max-w-3xl mb-16 sm:mb-24">
           <BubbleRevealText>
             <div className="text-sm sm:text-base font-[family-name:var(--font-headline)] font-600 tracking-[0.15em] uppercase text-violet mb-6">
               {partner.eyebrow}
