@@ -2,8 +2,8 @@ import Nav from "@/components/Nav";
 import Hero from "@/components/Hero";
 import Problem from "@/components/Problem";
 import WhatBlentDoes from "@/components/WhatBlentDoes";
+import VideoScroll from "@/components/VideoScroll";
 import Numbers from "@/components/Numbers";
-import Intervention from "@/components/Intervention";
 import Chemistry from "@/components/Chemistry";
 import Industries from "@/components/Industries";
 import Partner from "@/components/Partner";
@@ -17,13 +17,8 @@ import CustomCursor from "@/components/CustomCursor";
 export default function Home() {
   return (
     <>
-      {/* Custom circle cursor — mix-blend-mode: difference */}
       <CustomCursor />
-
-      {/* Viscous bubble stencil reveal — dark void that dissolves on load */}
       <StencilReveal />
-
-      {/* Global interactive bubble field — covers entire page, reacts to cursor */}
       <GlobalBubbles count={70} />
 
       <Nav />
@@ -31,8 +26,8 @@ export default function Home() {
         <Hero />
         <Problem />
         <WhatBlentDoes />
+        <VideoScroll />
         <Numbers />
-        <Intervention />
         <Chemistry />
         <Industries />
         <Partner />

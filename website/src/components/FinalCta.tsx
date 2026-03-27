@@ -21,14 +21,8 @@ export default function FinalCta() {
         </BubbleRevealText>
 
         <BubbleRevealText delay={0.15}>
-          <p className="text-lavender/50 text-base sm:text-lg max-w-xl mx-auto leading-relaxed mb-4">
+          <p className="text-lavender/50 text-base sm:text-lg max-w-xl mx-auto leading-relaxed mb-10">
             {finalCta.sub}
-          </p>
-        </BubbleRevealText>
-
-        <BubbleRevealText delay={0.25}>
-          <p className="text-lavender/30 text-sm max-w-md mx-auto mb-10">
-            {finalCta.guarantee}
           </p>
         </BubbleRevealText>
 

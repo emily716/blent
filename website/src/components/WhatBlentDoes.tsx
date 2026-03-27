@@ -44,27 +44,17 @@ export default function WhatBlentDoes() {
               </h2>
             </BubbleRevealText>
 
-            <BubbleRevealText delay={0.3}>
-              <p className="text-slate text-base sm:text-lg leading-relaxed mb-2">
-                {what.body}
-              </p>
-            </BubbleRevealText>
-
-            <BubbleRevealText delay={0.4}>
-              <p className="font-[family-name:var(--font-headline)] text-xl sm:text-2xl font-bold text-violet mb-2">
-                {what.tagline}
-              </p>
-            </BubbleRevealText>
-
-            <BubbleRevealText delay={0.5}>
-              <p className="text-coral font-[family-name:var(--font-headline)] text-lg font-bold">
-                {what.proof}
-              </p>
-            </BubbleRevealText>
+            {what.body.map((para, i) => (
+              <BubbleRevealText key={i} delay={0.2 + i * 0.1}>
+                <p className="text-slate text-base sm:text-lg leading-relaxed mb-4 last:mb-0">
+                  {para}
+                </p>
+              </BubbleRevealText>
+            ))}
           </div>
         </div>
 
-        {/* Removal items as horizontal row of text separated by bullets */}
+        {/* Scrolling substrate tags */}
         <BubbleRevealText delay={0.2}>
           <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-sm sm:text-base font-medium text-ink">
             {what.items.map((item, i) => (
