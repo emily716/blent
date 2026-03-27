@@ -2,6 +2,7 @@
 
 import { content } from "@/lib/content";
 import { BubbleRevealText, BubbleRevealCard } from "./BubbleReveal";
+import Image from "next/image";
 
 function Nl({ text }: { text: string }) {
   return (
@@ -15,6 +16,13 @@ function Nl({ text }: { text: string }) {
     </>
   );
 }
+
+const panelImages: Record<string, string> = {
+  "Ink manufacturing": "/images/industry-ink.png",
+  "Lithographic printing": "/images/industry-lithographic.png",
+  "Resin manufacturing": "/images/industry-resins.png",
+  "Paint & coatings": "/images/industry-vessel-cleaning.png",
+};
 
 export default function Industries() {
   const { industries } = content;
@@ -39,7 +47,7 @@ export default function Industries() {
           </h2>
         </BubbleRevealText>
 
-        {/* Bento-style grid: first card spans 2 columns, all cards have image space */}
+        {/* Bento-style grid: first card spans 2 columns, all cards have images */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 mb-14">
           {industries.panels.map((panel, i) => (
             <BubbleRevealCard
@@ -49,15 +57,18 @@ export default function Industries() {
                 i === 0 ? "sm:col-span-2 lg:col-span-2" : ""
               }`}
             >
-              {/* Image placeholder area */}
+              {/* Industry image */}
               <div
-                className={`relative bg-white/[0.03] border-b border-white/[0.06] flex items-center justify-center ${
+                className={`relative overflow-hidden ${
                   i === 0 ? "h-48 sm:h-56" : "h-40 sm:h-48"
                 }`}
               >
-                <span className="text-[10px] font-medium tracking-[0.2em] uppercase text-white/20">
-                  {panel.title} — image
-                </span>
+                <Image
+                  src={panelImages[panel.title]}
+                  alt={panel.title}
+                  fill
+                  className="object-cover opacity-70 group-hover:opacity-90 transition-opacity duration-500"
+                />
               </div>
 
               {/* Card content */}

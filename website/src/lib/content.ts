@@ -59,11 +59,11 @@ export const content = {
     eyebrow: "Our chemistry",
     headline: "Sourced with ambition.",
     body: [
-      "Over 90% of our active chemistry is bio-derived or green-classified — drawn from suppliers at the leading edge of sustainable formulation. Honeysurf and RE:Chemistry are two of them.",
+      "Over 90% of our active chemistry is bio-derived or green-classified — drawn from suppliers at the leading edge of sustainable formulation. Holiferm and RE:Chemistry are two of them.",
       "We're not there yet.\n100% bio-derived by 2030 is the target.",
     ],
     suppliers: [
-      { name: "Honeysurf", desc: "Bio-surfactant innovation" },
+      { name: "Holiferm", desc: "Bio-surfactant innovation" },
       { name: "RE:Chemistry", desc: "Green-classified solvents" },
     ],
   },

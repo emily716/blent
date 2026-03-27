@@ -33,8 +33,8 @@ export default function WhatBlentDoes() {
                 style={{ aspectRatio: "4/5" }}
               >
                 <Image
-                  src="/images/placeholder-product.svg"
-                  alt="PRODUCT IMAGE — Replace with blent product photo"
+                  src="/images/product-wipe-clean.png"
+                  alt="blent wipe clean product"
                   fill
                   className="object-cover"
                 />
