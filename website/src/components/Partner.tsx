@@ -33,14 +33,8 @@ export default function Partner() {
           ))}
 
           <BubbleRevealText delay={0.3}>
-            <p className="text-slate text-base sm:text-lg leading-relaxed mb-4">
+            <p className="text-slate text-base sm:text-lg leading-relaxed">
               {partner.offer}
-            </p>
-          </BubbleRevealText>
-
-          <BubbleRevealText delay={0.35}>
-            <p className="text-slate text-sm leading-relaxed">
-              {partner.credential}
             </p>
           </BubbleRevealText>
         </div>
@@ -61,7 +55,7 @@ export default function Partner() {
 
           <div className="flex flex-col gap-16 lg:gap-20">
             {partner.steps.map((step, i) => {
-              const isOdd = i % 2 === 0; // odd steps (0-indexed even) = title LEFT, desc RIGHT
+              const isOdd = i % 2 === 0;
               return (
                 <BubbleRevealText key={step.title} delay={0.4 + i * 0.12}>
                   <div className="relative">
@@ -100,9 +94,7 @@ export default function Partner() {
                           </div>
                           {/* Description on RIGHT */}
                           <div className="pl-8">
-                            <div
-                              className="flex items-center"
-                            >
+                            <div className="flex items-center">
                               <div
                                 className="w-8 h-[1px] flex-shrink-0"
                                 style={{

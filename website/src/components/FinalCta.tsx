@@ -21,21 +21,15 @@ export default function FinalCta() {
         </BubbleRevealText>
 
         <BubbleRevealText delay={0.15}>
-          <p className="text-lavender/50 text-base sm:text-lg max-w-xl mx-auto leading-relaxed mb-4">
+          <p className="text-lavender/50 text-base sm:text-lg max-w-xl mx-auto leading-relaxed mb-10">
             {finalCta.sub}
-          </p>
-        </BubbleRevealText>
-
-        <BubbleRevealText delay={0.25}>
-          <p className="text-lavender/30 text-sm max-w-md mx-auto mb-10">
-            {finalCta.guarantee}
           </p>
         </BubbleRevealText>
 
         <BubbleRevealText delay={0.35}>
           <a
             href={finalCta.cta.href}
-            className="inline-block text-sm font-semibold tracking-[0.1em] uppercase bg-lime text-ink px-10 py-5 btn-lift active:scale-95"
+            className="inline-block text-sm font-semibold tracking-[0.1em] uppercase bg-lime text-ink px-8 py-4 sm:px-10 sm:py-5 btn-lift active:scale-95"
           >
             {finalCta.cta.label}
           </a>

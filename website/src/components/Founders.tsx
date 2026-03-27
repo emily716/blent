@@ -25,13 +25,19 @@ export default function Founders() {
             </BubbleRevealText>
 
             <BubbleRevealText delay={0.1}>
-              <h2 className="font-[family-name:var(--font-headline)] text-3xl sm:text-4xl lg:text-5xl font-bold text-ink leading-tight tracking-tight mb-8">
+              <h2 className="font-[family-name:var(--font-headline)] text-3xl sm:text-4xl lg:text-5xl font-bold text-ink leading-tight tracking-tight mb-2">
                 {founders.headline}
               </h2>
             </BubbleRevealText>
 
+            <BubbleRevealText delay={0.15}>
+              <p className="font-[family-name:var(--font-headline)] text-xl sm:text-2xl font-bold text-violet leading-snug mb-8">
+                {founders.subheadline}
+              </p>
+            </BubbleRevealText>
+
             {founders.body.map((para, i) => (
-              <BubbleRevealText key={i} delay={0.15 + i * 0.08}>
+              <BubbleRevealText key={i} delay={0.2 + i * 0.08}>
                 <p className="text-slate text-base sm:text-lg leading-relaxed mb-4 last:mb-0">
                   {para}
                 </p>
@@ -40,7 +46,7 @@ export default function Founders() {
           </div>
 
           {/* Founder portraits — replace SVGs in /public/images/ with real photos */}
-          <div className="flex gap-6 lg:justify-end lg:mt-16">
+          <div className="flex gap-4 sm:gap-6 lg:justify-end lg:mt-16">
             {founders.people.map((person, i) => (
               <BubbleRevealText key={person.name} delay={0.3 + i * 0.12}>
                 <div className="text-center">

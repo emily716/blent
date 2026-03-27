@@ -11,27 +11,32 @@ export const content = {
   },
 
   hero: {
-    eyebrow: "Industrial cleaning, redefined",
-    headline: "Make clean, clean.",
-    sub: "Industrial-strength cleaning without the hazardous chemistry. Finally, you don't have to choose between your people and your throughput.",
+    eyebrow: "Making clean, clean.",
+    headline: "We've built what comes next.",
+    sub: "Water-based. Bio-derived. Works as hard as the chemistry you're replacing — and lasts up to ten times longer.",
     cta: { label: "Become a pilot partner", href: "#partner" },
     ctaSecondary: { label: "See how it works", href: "#what" },
   },
 
   problem: {
     eyebrow: "The real cost",
-    headline: "The hidden liability.",
+    headline: "You can do better. You just didn't know it.",
     body: [
-      "The solvents work.",
-      "So do the fumes in the lungs, the waste on the balance sheet, and the VOCs hanging over your shop floor.",
-      "Manufacturers have tried switching to less hazardous cleaning. Too often, that means weaker performance.",
-      "blent is here to end that trade-off.",
+      "Industrial cleaning chemistry has given manufacturers a false choice for decades. The effective options are toxic, flammable, or both. The safer alternatives don't work hard enough on the jobs that matter. The eco-friendly options are mostly petroleum chemistry with better packaging.",
+      "So you absorb the cost and get on with it. The PPE, the ventilation, the hazardous waste collections, the health monitoring. The failed runs when the cleaning doesn't perform.",
+      "Every year, the world uses 20 to 30 million tonnes of industrial cleaning chemistry. Most of it ends up in the air your workers breathe or the water table beneath your facility.",
+      "blent is the thing that didn't exist yet. Bio-derived, genuinely effective, and honest about the distance still to travel.",
     ],
   },
 
   what: {
     eyebrow: "What blent does",
-    headline: "Removes what nothing else will.",
+    headline: "Removes what nothing else will. Then does it again.",
+    body: [
+      "UV inks. Two-part resins. Baked-on carbon. The substrates that defeat standard aqueous cleaners and send manufacturers back to the toxic option.",
+      "blent is water-based and bio-derived — which has always meant a compromise on performance. We've removed the compromise. Our liquid self-filters in use, lasting up to ten times longer than conventional chemistry before it needs replacing. Our gel is single-application, for the jobs that need precision.",
+      "No PPE. No hazardous waste collections. No compromise on performance.",
+    ],
     items: [
       "Resins",
       "Paints",
@@ -39,39 +44,25 @@ export const content = {
       "Baked-on carbon",
       "Industrial grime",
     ],
-    body: "Hard surfaces. Tough coatings. Real manufacturing conditions.",
-    tagline: "Water-based. Bio-derived. Reusable.",
-    proof: "Yes. It really works.",
   },
 
   numbers: {
     eyebrow: "The proof",
-    headline: "The numbers.",
     stats: [
-      { value: "96%", label: "fewer VOCs than solvent equivalents" },
-      { value: "90%+", label: "bio-derived or green-classified chemistry" },
-      { value: "100%", label: "bio-derived target by 2030" },
-      { value: "1", label: "fluid. Reusable. Recoverable. Cost-competitive." },
+      { value: "96%", label: "Fewer VOCs than solvent equivalents" },
+      { value: "90%+", label: "Bio-derived or green-classified chemistry" },
+      { value: "Up to 10×", label: "Longer active lifespan than conventional chemistry" },
+      { value: "100%", label: "Bio-derived target by 2030. We mean it." },
     ],
-  },
-
-  intervention: {
-    eyebrow: "Minimum intervention",
-    headline: "Minimum intervention. Maximum impact.",
-    body: [
-      "blent is designed to work with your existing process.",
-      "Our fluids last longer, go further, and leave less behind.",
-      "Less waste. Lower cost over time.",
-    ],
+    supporting: "The economics work. We'll show you exactly how.",
   },
 
   chemistry: {
     eyebrow: "Our chemistry",
     headline: "Sourced with ambition.",
     body: [
-      "Over 90% of our active chemistry is bio-derived or green-classified — drawn from suppliers at the leading edge of sustainable formulation.",
-      "Honeysurf and RE:Chemistry are two of them.",
-      "We're not there yet. 100% bio-derived by 2030 is the target and we mean it.",
+      "Over 90% of our active chemistry is bio-derived or green-classified — drawn from suppliers at the leading edge of sustainable formulation. Honeysurf and RE:Chemistry are two of them.",
+      "We're not there yet. 100% bio-derived by 2030 is the target.",
     ],
     suppliers: [
       { name: "Honeysurf", desc: "Bio-surfactant innovation" },
@@ -104,19 +95,19 @@ export const content = {
         pain: "Changeover cleaning with solvents that never leave the air.",
       },
     ],
-    cta: "If you use aggressive chemistry to clean between runs, changeovers or batches — blent was built for you.",
+    cta: "If you're running changeovers on aggressive chemistry and absorbing the cost in waste, disposal, PPE and downtime — blent was built for exactly that.",
   },
 
   partner: {
     eyebrow: "Partner programme",
-    headline: "Be the first to eliminate hazardous cleaning entirely.",
+    headline:
+      "Be the first to eliminate hazardous cleaning from your operation entirely.",
     intro: [
-      "A small number of manufacturers will be the first to eliminate hazardous cleaning from their operation entirely.",
-      "We want to find them this year.",
+      "A small number of manufacturers will prove this out with us this year. We're looking for them now.",
+      "We learn your process, your products, your hardest cleaning challenge. We test blent against it in our lab and share every result. Then we come to you — on the floor, in real conditions. We work through it with you until it works. We don't declare victory until you do.",
     ],
-    offer: "If that's you: we learn your process, test blent against your hardest cleaning challenge, and show you the results. Then we come to you. We don't leave until it works.",
-    credential:
-      "Founding partners get locked-in pricing and direct access to us throughout. The ones who want to be named publicly will carry a sustainability credential that actually means something — because they were there when it was still being proven.",
+    offer:
+      "Founding partners get locked-in pricing, direct access to Emily and Chris, and a sustainability credential that actually means something — because they were there when it was still being proved.",
     steps: [
       {
         title: "Kick Off",
@@ -132,18 +123,20 @@ export const content = {
       },
       {
         title: "Roll Out",
-        desc: "We stay involved. The switch happens properly or it doesn't happen.",
+        desc: "We're with you through every step of implementation.",
       },
     ],
   },
 
   founders: {
-    eyebrow: "The founders",
+    eyebrow: "Founders",
     headline: "Emily & Chris.",
+    subheadline: "There's a 30 million tonne problem. We're fixing it.",
     body: [
-      "Emily and Chris built blent because they spent years watching manufacturers absorb the cost of cleaning processes nobody had properly questioned.",
-      "The financial cost. The human cost. The environmental cost.",
-      "They decided to be the ones who finally did something about it.",
+      "Emily and Chris both read Chemistry at the University of Nottingham. Between them, they've spent their careers in education and scaling clean-tech businesses — including building one together. They know how this industry works, and they know it can work better.",
+      "blent is their biggest swing yet. Novel chemistry. Cutting-edge bio-derived materials. Scaled at speed to have the largest possible positive impact on the planet.",
+      "They're chemists, tree huggers, and enthusiastic drinkers of tea — with the humility to know how far there is to go, and the ambition to close that gap before the kettle's boiled.",
+      "If you're a manufacturer who wants to be part of fixing a 30 million tonne problem, they'd very much like to hear from you.",
     ],
     people: [
       { name: "Emily", title: "Co-founder" },
@@ -152,16 +145,18 @@ export const content = {
   },
 
   finalCta: {
-    headline: "Think your product is too tough to clean without hazardous chemistry?",
-    sub: "Send us your product. We'll test blent against it in our lab and share the results. No obligation. No spin.",
-    guarantee:
-      "If we can't match your current cleaner, we'll send you something for the trouble.",
-    cta: { label: "Challenge our chemistry", href: "mailto:hello@blent.co" },
+    headline:
+      "Think your product is too tough to clean without hazardous chemistry?",
+    sub: "Send it to us. We'll test blent against it in our lab and share the full results. No obligation. No spin. If we can't match your current cleaner, we'll send you a cuppa for the trouble.",
+    cta: {
+      label: "Challenge our chemistry",
+      href: "mailto:hello@blentgroup.com",
+    },
   },
 
   footer: {
-    tagline: "Make clean, clean.",
-    email: "hello@blent.co",
-    copyright: `© ${new Date().getFullYear()} blent. All rights reserved.`,
+    tagline: "Making clean, clean.",
+    email: "hello@blentgroup.com",
+    copyright: `© ${new Date().getFullYear()} Blent Group Limited. All rights reserved.`,
   },
 };

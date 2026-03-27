@@ -22,13 +22,7 @@ export default function Numbers() {
           </div>
         </BubbleRevealText>
 
-        <BubbleRevealText delay={0.1}>
-          <h2 className="font-[family-name:var(--font-headline)] text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight tracking-tight mb-16">
-            {numbers.headline}
-          </h2>
-        </BubbleRevealText>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 sm:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 sm:gap-8 mb-16">
           {numbers.stats.map((stat, i) => (
             <BubbleRevealStat
               key={stat.value}
@@ -38,6 +32,12 @@ export default function Numbers() {
             />
           ))}
         </div>
+
+        <BubbleRevealText delay={0.6}>
+          <p className="text-lavender/50 text-base sm:text-lg max-w-2xl">
+            {numbers.supporting}
+          </p>
+        </BubbleRevealText>
       </div>
     </section>
   );
