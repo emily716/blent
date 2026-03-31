@@ -29,7 +29,7 @@ export default function Nav() {
       <div className="flex items-center justify-between px-6 sm:px-10 py-4 max-w-[1400px] mx-auto">
         <a href="#" className="flex-shrink-0">
           <Image
-            src="/logo.svg"
+            src="/logos/logo.svg"
             alt="blent"
             width={120}
             height={36}

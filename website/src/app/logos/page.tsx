@@ -5,31 +5,31 @@ import Image from "next/image";
 const LOGOS = [
   {
     label: "Standard",
-    src: "/logo.svg",
+    src: "/logos/logo.svg",
     pngFilename: "blent-logo.png",
     bg: "bg-dark",
   },
   {
     label: "Large (scalable)",
-    src: "/logo-large.svg",
+    src: "/logos/logo-large.svg",
     pngFilename: "blent-logo-large.png",
     bg: "bg-dark",
   },
   {
     label: "Green",
-    src: "/logo-green.svg",
+    src: "/logos/logo-green.svg",
     pngFilename: "blent-logo-green.png",
     bg: "bg-dark",
   },
   {
     label: "Black",
-    src: "/logo-black.svg",
+    src: "/logos/logo-black.svg",
     pngFilename: "blent-logo-black.png",
     bg: "bg-fog",
   },
   {
     label: "White",
-    src: "/logo-white.svg",
+    src: "/logos/logo-white.svg",
     pngFilename: "blent-logo-white.png",
     bg: "bg-dark",
   },
