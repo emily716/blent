@@ -57,35 +57,66 @@ export default function CustomCursor() {
 
   if (!visible) return null;
 
-  // Bubble shape: 201×247 aspect ratio → maintain proportions
-  const h = hovering ? 74 : 54;
-  const w = Math.round(h * (201 / 247));
+  // Glass bubble — cropped to the sphere portion of logo.svg (cx=44 cy=44 r=33)
+  const size = hovering ? 60 : 44;
 
   return (
     <div
       className="fixed pointer-events-none"
       style={{
         zIndex: 9999,
-        width: w,
-        height: h,
-        left: pos.x - w / 2,
-        top: pos.y - h / 2,
+        width: size,
+        height: size,
+        left: pos.x - size / 2,
+        top: pos.y - size / 2,
         transition: "width 0.2s ease, height 0.2s ease",
       }}
     >
       <svg
-        width={w}
-        height={h}
-        viewBox="0 0 201 247"
-        fill="none"
+        width={size}
+        height={size}
+        viewBox="10 10 68 68"
         xmlns="http://www.w3.org/2000/svg"
         style={{ display: "block" }}
       >
-        <path
-          d="M11.3958 226.5C8.13021 225.135 5.41667 222.833 3.25 219.583C1.08333 216.333 0 212.948 0 209.417V18.2917C0 13.4167 1.82292 9.15625 5.47917 5.5C9.14583 1.83333 13.4167 0 18.2917 0H61C64.7917 0 68.1771 1.15625 71.1667 3.45833C74.151 5.76563 76.3177 8.54167 77.6667 11.7917L93.125 26.8333C96.651 30.3646 98.4167 34.2917 98.4167 38.625V40.6667H118.333C129.443 40.6667 139.609 43.3125 148.833 48.6042C158.052 53.8854 165.375 60.8646 170.792 69.5417L181.771 80.1042C187.464 85.8021 191.938 92.375 195.188 99.8333C198.438 107.292 200.062 115.354 200.062 124.021V185.021C200.062 196.411 197.354 206.781 191.938 216.125C186.521 225.484 179.13 232.943 169.771 238.5C160.422 244.052 150.052 246.833 138.667 246.833H115.479C107.354 246.833 99.6302 245.339 92.3125 242.354C90.9479 243.438 89.3177 244.448 87.4167 245.396C85.526 246.354 83.5 246.833 81.3333 246.833H38.625C34.2917 246.833 30.3594 245.068 26.8333 241.542L11.3958 226.5Z"
-          fill="#5E4ADA"
-          fillOpacity={0.85}
-        />
+        <defs>
+          <radialGradient id="cur-body" cx="38%" cy="32%" r="65%">
+            <stop offset="0%"   stopColor="#C4B5FF" stopOpacity="0.55"/>
+            <stop offset="45%"  stopColor="#7B5EFF" stopOpacity="0.28"/>
+            <stop offset="100%" stopColor="#3A1FBB" stopOpacity="0.45"/>
+          </radialGradient>
+          <radialGradient id="cur-spec" cx="38%" cy="22%" r="45%">
+            <stop offset="0%"   stopColor="#ffffff" stopOpacity="0.92"/>
+            <stop offset="60%"  stopColor="#ffffff" stopOpacity="0.18"/>
+            <stop offset="100%" stopColor="#ffffff" stopOpacity="0"/>
+          </radialGradient>
+          <radialGradient id="cur-refl" cx="50%" cy="88%" r="45%">
+            <stop offset="0%"   stopColor="#B8F05A" stopOpacity="0.35"/>
+            <stop offset="100%" stopColor="#B8F05A" stopOpacity="0"/>
+          </radialGradient>
+          <filter id="cur-shadow" x="-30%" y="-30%" width="160%" height="160%">
+            <feDropShadow dx="0" dy="2" stdDeviation="3"
+              floodColor="#5533CC" floodOpacity="0.35"/>
+          </filter>
+        </defs>
+        {/* Outer ring */}
+        <circle cx="44" cy="44" r="36"
+          fill="none" stroke="#7B5EFF" strokeWidth="1" opacity="0.18"/>
+        {/* Glass body */}
+        <circle cx="44" cy="44" r="33"
+          fill="url(#cur-body)"
+          stroke="#C4B5FF" strokeWidth="0.8" strokeOpacity="0.6"
+          filter="url(#cur-shadow)"/>
+        {/* Green bottom reflection */}
+        <circle cx="44" cy="44" r="33" fill="url(#cur-refl)"/>
+        {/* Top specular highlight */}
+        <ellipse cx="35" cy="30" rx="16" ry="10" fill="url(#cur-spec)"/>
+        {/* Bright inner highlight */}
+        <ellipse cx="31" cy="26" rx="5" ry="3" fill="white" opacity="0.75"/>
+        {/* Bottom rim light */}
+        <path d="M 62 55 A 33 33 0 0 1 26 68"
+          fill="none" stroke="white" strokeWidth="0.8"
+          strokeOpacity="0.22" strokeLinecap="round"/>
       </svg>
     </div>
   );
