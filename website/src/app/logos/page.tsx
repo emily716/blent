@@ -5,27 +5,27 @@ import Image from "next/image";
 const LOGOS = [
   {
     label: "Standard",
-    src: "/logo-new.svg",
+    src: "/logo.svg",
     pngFilename: "blent-logo.png",
-    bg: "bg-violet",
+    bg: "bg-dark",
   },
   {
     label: "Large (scalable)",
-    src: "/logo-new-large.svg",
+    src: "/logo-large.svg",
     pngFilename: "blent-logo-large.png",
-    bg: "bg-violet",
+    bg: "bg-dark",
   },
   {
     label: "Green text",
-    src: "/logo-new-green.svg",
+    src: "/logo-green.svg",
     pngFilename: "blent-logo-green.png",
-    bg: "bg-violet",
+    bg: "bg-dark",
   },
   {
     label: "Black text",
-    src: "/logo-new-black.svg",
+    src: "/logo-black.svg",
     pngFilename: "blent-logo-black.png",
-    bg: "bg-violet",
+    bg: "bg-fog",
   },
 ];
 
@@ -37,8 +37,8 @@ async function downloadAsPng(svgUrl: string, filename: string, scale = 4) {
   const svgDoc = parser.parseFromString(svgText, "image/svg+xml");
   const svgEl = svgDoc.documentElement;
 
-  const w = parseFloat(svgEl.getAttribute("width") ?? "201");
-  const h = parseFloat(svgEl.getAttribute("height") ?? "247");
+  const w = parseFloat(svgEl.getAttribute("width") ?? "300");
+  const h = parseFloat(svgEl.getAttribute("height") ?? "90");
 
   const blob = new Blob([svgText], { type: "image/svg+xml" });
   const url = URL.createObjectURL(blob);
