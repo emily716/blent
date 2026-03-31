@@ -16,16 +16,22 @@ const LOGOS = [
     bg: "bg-dark",
   },
   {
-    label: "Green text",
+    label: "Green",
     src: "/logo-green.svg",
     pngFilename: "blent-logo-green.png",
     bg: "bg-dark",
   },
   {
-    label: "Black text",
+    label: "Black",
     src: "/logo-black.svg",
     pngFilename: "blent-logo-black.png",
     bg: "bg-fog",
+  },
+  {
+    label: "White",
+    src: "/logo-white.svg",
+    pngFilename: "blent-logo-white.png",
+    bg: "bg-dark",
   },
 ];
 

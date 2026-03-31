@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 90" width="300" height="90">
+  <defs>
+    <radialGradient id="lw-body" cx="38%" cy="32%" r="65%">
+      <stop offset="0%"   stop-color="#ffffff" stop-opacity="0.95"/>
+      <stop offset="45%"  stop-color="#e0e0e0" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#aaaaaa" stop-opacity="0.55"/>
+    </radialGradient>
+    <radialGradient id="lw-spec" cx="38%" cy="22%" r="45%">
+      <stop offset="0%"   stop-color="#ffffff" stop-opacity="1"/>
+      <stop offset="60%"  stop-color="#ffffff" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="lw-refl" cx="50%" cy="88%" r="45%">
+      <stop offset="0%"   stop-color="#ffffff" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="lw-shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6"
+        flood-color="#888888" flood-opacity="0.25"/>
+    </filter>
+    <filter id="lw-text-glow" x="-5%" y="-20%" width="110%" height="140%">
+      <feDropShadow dx="0" dy="2" stdDeviation="4"
+        flood-color="#ffffff" flood-opacity="0.6"/>
+    </filter>
+  </defs>
+  <circle cx="44" cy="44" r="36"
+    fill="none" stroke="#ffffff" stroke-width="1" opacity="0.4"/>
+  <circle cx="44" cy="44" r="33"
+    fill="url(#lw-body)"
+    stroke="#ffffff" stroke-width="0.8" stroke-opacity="0.7"
+    filter="url(#lw-shadow)"/>
+  <circle cx="44" cy="44" r="33" fill="url(#lw-refl)"/>
+  <ellipse cx="35" cy="30" rx="16" ry="10" fill="url(#lw-spec)"/>
+  <ellipse cx="31" cy="26" rx="5" ry="3" fill="white" opacity="1"/>
+  <path d="M 62 55 A 33 33 0 0 1 26 68"
+    fill="none" stroke="white" stroke-width="0.8"
+    stroke-opacity="0.5" stroke-linecap="round"/>
+  <text x="92" y="57"
+    font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
+    font-weight="800" font-size="40" letter-spacing="-2"
+    fill="#ffffff"
+    filter="url(#lw-text-glow)">blent</text>
+</svg>
