@@ -34,10 +34,10 @@ for (const file of files) {
   console.log(`✓ ${file} → ${file.replace(/\.svg$/, ".png")} (${width}px wide)`);
 }
 
-// Email signature variant: small + optimised, rendered from the black mark
-// (looks right on Gmail's white background). Display at width="240" in HTML
-// for a crisp retina-quality logo at ~120px on standard screens.
-const EMAIL_SOURCE = "logo-black.svg";
+// Email signature variant: small + optimised, rendered from the standard
+// colour mark. Display at width="240" in HTML for a crisp retina-quality
+// logo at ~120px on standard screens.
+const EMAIL_SOURCE = "logo.svg";
 const EMAIL_WIDTH = 480;
 const emailSvg = await readFile(join(LOGOS_DIR, EMAIL_SOURCE));
 const emailPng = await sharp(emailSvg, { density: 72 * (EMAIL_WIDTH / 300) })
