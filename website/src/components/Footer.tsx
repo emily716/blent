@@ -12,7 +12,7 @@ export default function Footer() {
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
           <div className="flex items-center gap-4">
             <Image
-              src="/logo.svg"
+              src="/logos/logo.svg"
               alt="blent"
               width={100}
               height={30}
@@ -21,6 +21,12 @@ export default function Footer() {
             <span className="text-lavender/30 text-sm">{footer.tagline}</span>
           </div>
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-8">
+            <a
+              href="/logos"
+              className="text-lavender/40 text-sm hover:text-lime transition-colors"
+            >
+              Brand
+            </a>
             <a
               href={`mailto:${footer.email}`}
               className="text-lavender/40 text-sm hover:text-lime transition-colors"
