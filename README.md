@@ -69,10 +69,21 @@ Every variant of the logo lives in `website/public/logos/`:
 | `logo-black.svg` | Black on light backgrounds |
 | `logo-white.svg` | White on dark backgrounds |
 
-The site exposes these at **`/logos`** with download buttons for SVG (vector)
-and PNG (4× raster). To add a new variant, drop the SVG into
-`website/public/logos/` and add a row to the `LOGOS` array in
-`website/src/app/logos/page.tsx`.
+A 4×-scale PNG sits next to each SVG (e.g. `logo.png` next to `logo.svg`).
+PNGs are rendered from the SVGs by `website/scripts/render-logo-pngs.mjs` —
+re-run after editing any SVG with:
+
+```bash
+cd website
+npm run render-logos
+```
+
+The site exposes both formats at **`/logos`** with direct download buttons
+(SVG = vector, PNG = high-res 4× raster).
+
+To add a new variant: drop the SVG into `website/public/logos/`, run
+`npm run render-logos` to generate the matching PNG, then add a row to the
+`LOGOS` array in `website/src/app/logos/page.tsx`.
 
 The two original master SVGs from the designer are kept in `assets/logos/`
 for reference (`blent-logo.svg`, `blent-logo-v1.svg`).

@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "render-logos": "node scripts/render-logo-pngs.mjs"
   },
   "keywords": [],
   "author": "",
