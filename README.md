@@ -69,9 +69,10 @@ Every variant of the logo lives in `website/public/logos/`:
 | `logo-black.svg` | Black on light backgrounds |
 | `logo-white.svg` | White on dark backgrounds |
 
-A 4×-scale PNG sits next to each SVG (e.g. `logo.png` next to `logo.svg`).
-PNGs are rendered from the SVGs by `website/scripts/render-logo-pngs.mjs` —
-re-run after editing any SVG with:
+A 4×-scale PNG sits next to each SVG (e.g. `logo.png` next to `logo.svg`),
+plus a small `logo-email.png` (480×144, ~10KB) optimised for email
+signatures. PNGs are rendered from the SVGs by
+`website/scripts/render-logo-pngs.mjs` — re-run after editing any SVG with:
 
 ```bash
 cd website
@@ -87,6 +88,29 @@ To add a new variant: drop the SVG into `website/public/logos/`, run
 
 The two original master SVGs from the designer are kept in `assets/logos/`
 for reference (`blent-logo.svg`, `blent-logo-v1.svg`).
+
+### Using the logo in a Gmail signature
+
+Once this branch is merged and Netlify has rebuilt, the email-optimised PNG
+will be live at:
+
+```
+https://www.blentgroup.com/logos/logo-email.png
+```
+
+Paste this into Gmail → Settings → Signature (use the "insert image → Web
+address" option), or use HTML if you're editing a signature in a tool that
+supports it:
+
+```html
+<img src="https://www.blentgroup.com/logos/logo-email.png"
+     alt="blent"
+     width="240"
+     style="display:block;border:0">
+```
+
+The source is 480px wide so it stays crisp on retina screens when displayed
+at 240px. Use `logo-black.png` instead if you want the full 1200px version.
 
 ## assets/
 
