@@ -120,7 +120,7 @@ kebab-case so they're safe to use anywhere.
 
 ```
 assets/
-├── images/    ← raw photos and supplier logos (originals)
+├── images/    ← raw photos (originals)
 └── logos/     ← original master SVGs
 ```
 

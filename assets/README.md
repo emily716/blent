@@ -6,7 +6,7 @@ live site** — these are the originals. The website serves files from
 
 ```
 assets/
-├── images/    ← raw photos and supplier logos (originals)
+├── images/    ← raw photos (originals)
 └── logos/     ← original master SVGs from the designer
 ```
 
